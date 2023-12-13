@@ -25,14 +25,14 @@ export const basiliskRouteConfigs = createRouteConfigs("basilisk", [
     to: "kusama",
     token: "KSM",
     xcm: {
-      fee: { token: "KSM", amount: "104571640" },
+      fee: { token: "KSM", amount: "81779545" },
     },
   },
   {
     to: "karura",
     token: "BSX",
     xcm: {
-      fee: { token: "BSX", amount: "93240000000" },
+      fee: { token: "BSX", amount: "93240000000" }, 
     },
   },
   {

@@ -3,8 +3,9 @@ import { ApiPromise, WsProvider } from "@polkadot/api";
 import { FixedPointNumber } from "@acala-network/sdk-core";
 import { BasiliskAdapter } from "./hydradx";
 import { formateRouteLogLine, logFormatedRoute } from "../utils/unit-test";
+import { firstValueFrom } from "rxjs";
 
-describe.skip("basilisk adapter should work", () => {
+describe("basilisk adapter should work", () => {
   jest.setTimeout(300000);
 
   const address = "5GREeQcGHt7na341Py6Y6Grr38KUYRvVoiFSiDB52Gt7VZiN";
@@ -14,7 +15,7 @@ describe.skip("basilisk adapter should work", () => {
   beforeAll(async () => {
     const basilisk = new BasiliskAdapter();
 
-    const basiliskApi = new ApiPromise({ provider: new WsProvider("wss://rpc.basilisk.cloud") });
+    const basiliskApi = new ApiPromise({ provider: new WsProvider("wss://basilisk-rpc.dwellir.com") });
 
     await basilisk.init(basiliskApi);
 
@@ -49,7 +50,7 @@ describe.skip("basilisk adapter should work", () => {
       if (!adapter) return;
 
       const allRoutes = bridge.router.getAvailableRouters();
-      allRoutes.forEach((e) => {
+      allRoutes.forEach(async (e) => {
         const token = adapter.getToken(e.token);
 
         const tx = adapter.createTx({
@@ -57,6 +58,21 @@ describe.skip("basilisk adapter should work", () => {
           token: token.name,
           amount: new FixedPointNumber(1, token.decimals),
           address,
+        });
+        const params = {
+          to: e.to.id,
+          token: token.name,
+          amount: new FixedPointNumber(1, token.decimals),
+          address,
+          signer: address
+        }
+        adapter.estimateTxFee(params).subscribe({
+          next: feeEstimate => {
+            console.log("Fee Estimate: ", feeEstimate);
+          },
+          error: error => {
+            console.error('Error estimating fee:', error);
+          }
         });
 
         expect(tx).toBeDefined();

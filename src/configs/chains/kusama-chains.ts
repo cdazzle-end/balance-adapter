@@ -125,6 +125,13 @@ export const kusamaChains = {
     paraChainId: 2102,
     ss58Prefix: 42,
   },
+  mangata: {
+    display: "Mangata",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fmangata-x.png&w=96&q=75",
+    paraChainId: 2110,
+    ss58Prefix: 42,
+  },
   basilisk: {
     display: "Basilisk",
     type: "substrate",

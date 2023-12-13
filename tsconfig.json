@@ -1,5 +1,5 @@
 {
-  "extends": "@open-web3/dev-config/config/tsconfig.json",
+
   "exclude": ["build/**/*", "**/build/**/*", "scripts/**/*", "docs/**/*", "**/*.spec.ts"],
   "compilerOptions": {
     "target": "es2019",
@@ -9,6 +9,16 @@
     "skipLibCheck": true,
     "emitDeclarationOnly": false,
     "outDir": "build",
-    "typeRoots": ["./node_modules/@polkadot/ts", "./node_modules/@types"]
+    "typeRoots": ["./node_modules/@polkadot/ts", "./node_modules/@types"],
+    "jsx": "preserve",
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true
   }
 }
