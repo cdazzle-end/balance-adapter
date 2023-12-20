@@ -4,3 +4,6 @@ export * from "./api-provider";
 export * from "./adapters";
 export * from "./configs/index";
 export * from "./types";
+export * from "./errors";
+export * from "./utils/index";
+export * from "./custom-utils";
