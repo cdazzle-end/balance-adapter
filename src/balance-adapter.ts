@@ -31,7 +31,8 @@ export abstract class BalanceAdapter {
   }
 
   public getToken<R extends BasicToken = BasicToken>(token: string): R {
-    const tokenConfig = this.tokens[token];
+    
+    const tokenConfig = this.tokens[token.toUpperCase()];
 
     if (!tokenConfig) throw new TokenNotFound(token, this.chain);
 
