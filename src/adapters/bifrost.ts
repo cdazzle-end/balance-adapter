@@ -58,6 +58,13 @@ export const bifrostTokensConfig: Record<string, ExtendedToken> = {
     ed: "10000000000",
     toRaw: () => ({ Native: "BNC" }),
   },
+  VBNC: {
+    name: "VBNC",
+    symbol: "VBNC",
+    decimals: 12,
+    ed: "10000000000",
+    toRaw: () => ({ VToken: "BNC" }),
+  },
   VSKSM: {
     name: "VSKSM",
     symbol: "VSKSM",
@@ -86,6 +93,28 @@ export const bifrostTokensConfig: Record<string, ExtendedToken> = {
     ed: "100000000",
     toRaw: () => ({ Stable: "KUSD" }),
   },
+  ZLK: {
+    name: "ZLK",
+    symbol: "ZLK",
+    decimals: 18,
+    ed: "1000000000000",
+    toRaw: () => ({ Token: "ZLK" }),
+  },
+  
+  VKSM: {
+    name: "VKSM",
+    symbol: "VKSM",
+    decimals: 12,
+    ed: "100000000",
+    toRaw: () => ({ VToken: "KSM" }),
+  },
+  VMOVR: {
+    name: "VMOVR",
+    symbol: "VMOVR",
+    decimals: 18,
+    ed: "1000000000000",
+    toRaw: () => ({ VToken: "MOVR" }),
+  }
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
