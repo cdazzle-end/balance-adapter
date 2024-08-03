@@ -139,6 +139,10 @@ export abstract class BaseCrossChainAdapter {
     return firstValueFrom(this.subscribeMinInput(token, to));
   }
 
+  public getTokens() {
+    return this.tokens;
+  }
+
   public getToken<R extends BasicToken = BasicToken>(
     token: string,
     chain?: ChainId

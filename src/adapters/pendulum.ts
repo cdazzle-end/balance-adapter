@@ -9,99 +9,28 @@ import { ISubmittableResult } from "@polkadot/types/types";
 import { BalanceAdapter, BalanceAdapterConfigs } from "../balance-adapter";
 import { BaseCrossChainAdapter } from "../base-chain-adapter";
 import { ChainId, chains } from "../configs";
-import { ApiNotFound, InvalidAddress, TokenNotFound } from "../errors";
-import { BalanceData, ExtendedToken, TransferParams } from "../types";
-import { createRouteConfigs, validateAddress } from "../utils";
+import { BalanceData, BasicToken, ExtendedToken, TransferParams } from "../types";
+import { ApiNotFound, TokenNotFound } from "../errors";
+import { isChainEqual } from "../utils/is-chain-equal";
+import {
+  createXTokensAssetsParam,
+  createXTokensDestParam,
+  createRouteConfigs,
+} from "../utils";
 
-const DEST_WEIGHT = "5000000000";
+import { statemineTokensConfig, statemintTokensConfig } from "./statemint";
 
-export const calamariRouteConfigs = createRouteConfigs("calamari", [
-  {
-    to: "karura",
-    token: "KMA",
-    xcm: {
-      fee: { token: "KMA", amount: "6400000000" },
-      weightLimit: DEST_WEIGHT,
-    },
-  },
-  {
-    to: "karura",
-    token: "KUSD",
-    xcm: {
-      fee: { token: "KUSD", amount: "6381112603" },
-      weightLimit: DEST_WEIGHT,
-    },
-  },
-  {
-    to: "karura",
-    token: "KAR",
-    xcm: {
-      fee: { token: "KAR", amount: "6400000000" },
-      weightLimit: DEST_WEIGHT,
-    },
-  },
-  {
-    to: "karura",
-    token: "LKSM",
-    xcm: {
-      fee: { token: "LKSM", amount: "452334406" },
-      weightLimit: DEST_WEIGHT,
-    },
-  },
-  {
-    to: "karura",
-    token: "KSM",
-    xcm: {
-      fee: { token: "KSM", amount: "54632622" },
-      weightLimit: DEST_WEIGHT,
-    },
-  },
-]);
-export const mantaTokensConfig: Record<string, ExtendedToken> = {
-  MANTA: {
-    name: "MANTA",
-    symbol: "MANTA",
+export const pendulumRouteConfigs = createRouteConfigs("pendulum", [
+
+  ]);
+
+export const pendulumTokensConfig: Record<string, BasicToken> = {
+  PEN: {
+    name: "PEN",
+    symbol: "PEN",
     decimals: 12,
-    ed: "100000000000",
-    toRaw: () => 1,
-  },
-}
-export const calamariTokensConfig: Record<string, ExtendedToken> = {
-  KMA: {
-    name: "KMA",
-    symbol: "KMA",
-    decimals: 12,
-    ed: "100000000000",
-    toRaw: () => 1,
-  },
-  KAR: {
-    name: "KAR",
-    symbol: "KAR",
-    decimals: 12,
-    ed: "100000000000",
-    toRaw: () => 8,
-  },
-  KUSD: {
-    name: "KUSD",
-    symbol: "KUSD",
-    decimals: 12,
-    ed: "10000000000",
-    toRaw: () => 9,
-  },
-  LKSM: {
-    name: "LKSM",
-    symbol: "LKSM",
-    decimals: 12,
-    ed: "500000000",
-    toRaw: () => 10,
-  },
-  KSM: {
-    name: "KSM",
-    symbol: "KSM",
-    decimals: 12,
-    ed: "100000000",
-    toRaw: () => 12,
-  },
+    ed: "0",
+  }
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -112,17 +41,11 @@ const createBalanceStorages = (api: AnyApi) => {
         api,
         path: "derive.balances.all",
         params: [address],
-      }),
-    assets: (id: number, address: string) =>
-      Storage.create<any>({
-        api,
-        path: "query.assets.account",
-        params: [id, address],
-      }),
+      })
   };
 };
 
-class MantaBalanceAdapter extends BalanceAdapter {
+class PendulumBalanceAdapter extends BalanceAdapter {
   private storages: ReturnType<typeof createBalanceStorages>;
 
   constructor({ api, chain, tokens }: BalanceAdapterConfigs) {
@@ -131,14 +54,12 @@ class MantaBalanceAdapter extends BalanceAdapter {
   }
 
   public subscribeBalance(
-    token: string,
+    tokenName: string,
     address: string
   ): Observable<BalanceData> {
-    if (!validateAddress(address)) throw new InvalidAddress(address);
-
     const storage = this.storages.balances(address);
 
-    if (token === this.nativeToken) {
+    if (tokenName === this.nativeToken) {
       return storage.observable.pipe(
         map((data) => ({
           free: FN.fromInner(data.freeBalance.toString(), this.decimals),
@@ -153,42 +74,25 @@ class MantaBalanceAdapter extends BalanceAdapter {
           ),
         }))
       );
+    } else {
+        throw new TokenNotFound(tokenName);
     }
 
-    const tokenData: ExtendedToken = this.getToken(token);
-
-    if (!tokenData) throw new TokenNotFound(token);
-
-    return this.storages.assets(tokenData.toRaw(), address).observable.pipe(
-      map((balance) => {
-        const amount = FN.fromInner(
-          balance.unwrapOrDefault()?.balance?.toString() || "0",
-          tokenData.decimals
-        );
-
-        return {
-          free: amount,
-          locked: new FN(0),
-          reserved: new FN(0),
-          available: amount,
-        };
-      })
-    );
   }
 }
 
-class BaseMantaAdapter extends BaseCrossChainAdapter {
-  private balanceAdapter?: MantaBalanceAdapter;
+class BasePendulumAdapter extends BaseCrossChainAdapter {
+  private balanceAdapter?: PendulumBalanceAdapter;
 
   public async init(api: AnyApi) {
     this.api = api;
 
     await api.isReady;
 
-    this.balanceAdapter = new MantaBalanceAdapter({
+    this.balanceAdapter = new PendulumBalanceAdapter({
       chain: this.chain.id as ChainId,
       api,
-      tokens: calamariTokensConfig,
+      tokens: this.tokens,
     });
   }
 
@@ -247,18 +151,41 @@ class BaseMantaAdapter extends BaseCrossChainAdapter {
   ):
     | SubmittableExtrinsic<"promise", ISubmittableResult>
     | SubmittableExtrinsic<"rxjs", ISubmittableResult> {
+    if (!this.api) throw new ApiNotFound(this.chain.id);
+
+    const { amount, to, token, address } = params;
+    const toChain = chains[to];
+
+    // For statemine & statemint
+    if (
+      isChainEqual(toChain, "statemine") ||
+      isChainEqual(toChain, "statemint")
+    ) {
+      const tokenData: ExtendedToken = isChainEqual(toChain, "statemine")
+        ? statemineTokensConfig[token]
+        : statemintTokensConfig[token];
+
+      const accountId = this.api?.createType("AccountId32", address).toHex();
+
+      if (!token) throw new TokenNotFound(token);
+      return this.api.tx.xTokens.transferMultiasset(
+        createXTokensAssetsParam(
+          this.api,
+          toChain.paraChainId,
+          tokenData.toRaw(),
+          amount.toChainData()
+        ),
+        createXTokensDestParam(this.api, toChain.paraChainId, accountId) as any,
+        "Unlimited"
+      );
+    }
+
     return this.createXTokensTx(params);
   }
 }
 
-export class CalamariAdapter extends BaseMantaAdapter {
+export class PendulumAdapter extends BasePendulumAdapter {
   constructor() {
-    super(chains.calamari, calamariRouteConfigs, calamariTokensConfig);
-  }
-}
-
-export class MantaAdapter extends BaseMantaAdapter {
-  constructor() {
-    super(chains.manta, calamariRouteConfigs, mantaTokensConfig);
+    super(chains.pendulum, pendulumRouteConfigs, pendulumTokensConfig);
   }
 }

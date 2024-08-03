@@ -34,6 +34,10 @@ export const crabTokensConfig: Record<string, BasicToken> = {
   CRAB: { name: "CRAB", symbol: "CRAB", decimals: 18, ed: "0" },
 };
 
+export const darwiniaTokensConfig: Record<string, BasicToken> = {
+  CRAB: { name: "RING", symbol: "CRAB", decimals: 18, ed: "0" },
+};
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const createBalanceStorages = (api: AnyApi) => {
   return {
@@ -180,5 +184,11 @@ class BaseDarwiniaAdapter extends BaseCrossChainAdapter {
 export class CrabAdapter extends BaseDarwiniaAdapter {
   constructor() {
     super(chains.crab, crabRouteConfigs, crabTokensConfig);
+  }
+}
+
+export class DarwiniaAdapter extends BaseDarwiniaAdapter {
+  constructor() {
+    super(chains.darwinia, crabRouteConfigs, darwiniaTokensConfig);
   }
 }

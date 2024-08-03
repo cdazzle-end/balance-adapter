@@ -88,6 +88,13 @@ export const statemintTokensConfig: Record<string, ExtendedToken> = {
     ed: "700000",
     toRaw: () => new BN(1984),
   },
+  USDC: {
+    name: "USDC",
+    symbol: "USDC",
+    decimals: 6,
+    ed: "700000",
+    toRaw: () => new BN(1337),
+  },
 };
 
 export const statemineTokensConfig: Record<string, ExtendedToken> = {

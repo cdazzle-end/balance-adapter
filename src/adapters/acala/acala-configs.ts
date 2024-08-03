@@ -201,4 +201,10 @@ export const acalaTokensConfig: Record<string, BasicToken> = {
     decimals: 6,
     ed: "700000",
   },
+  USDC: {
+    name: "USDC",
+    symbol: "USDC",
+    decimals: 6,
+    ed: "700000",
+  },
 };

@@ -30,6 +30,10 @@ const tinkernetTokensConfig: Record<string, BasicToken> = {
   TNKR: { name: "TNKR", symbol: "TNKR", decimals: 12, ed: "1000000000" },
 };
 
+const invarchTokensConfig: Record<string, BasicToken> = {
+  VARCH: { name: "VARCH", symbol: "VARCH", decimals: 12, ed: "1000000000" },
+};
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const createBalanceStorages = (api: AnyApi) => {
   return {
@@ -174,5 +178,11 @@ class TinkernetBaseAdapter extends BaseCrossChainAdapter {
 export class TinkernetAdapter extends TinkernetBaseAdapter {
   constructor() {
     super(chains.tinkernet, tinkernetRoutersConfig, tinkernetTokensConfig);
+  }
+}
+
+export class InvarchAdapter extends TinkernetBaseAdapter {
+  constructor() {
+    super(chains.invarch, tinkernetRoutersConfig, invarchTokensConfig);
   }
 }

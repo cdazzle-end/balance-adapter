@@ -114,8 +114,144 @@ export const bifrostTokensConfig: Record<string, ExtendedToken> = {
     decimals: 18,
     ed: "1000000000000",
     toRaw: () => ({ VToken: "MOVR" }),
+  },
+  USDT: {
+    name: "USDT",
+    symbol: "USDT",
+    decimals: 6,
+    ed: "1000",
+    toRaw: () => ({ Token2: 0 }),
+  },
+  RMRK: {
+    name: "RMRK",
+    symbol: "RMRK",
+    decimals: 10,
+    ed: "10000",
+    toRaw: () => ({ Token: "RMRK"}),
+  },
+  KBTC: {
+    name: "KBTC",
+    symbol: "KBTC",
+    decimals: 8,
+    ed: "100",
+    toRaw: () => ({ Token2: 2}),
   }
 };
+
+export const bifrostPolkadotTokensConfig: Record<string, ExtendedToken> = {
+  BNC: {
+    name: "BNC",
+    symbol: "BNC",
+    decimals: 12,
+    ed: "10000000000",
+    toRaw: () => ({ Native: "BNC" }),
+  },
+  IBTC: {
+    name: "IBTC",
+    symbol: "IBTC",
+    decimals: 8,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 6 }),
+  },
+  MANTA: {
+    name: "MANTA",
+    symbol: "MANTA",
+    decimals: 8,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 8 }),
+  },
+  INTR: {
+    name: "INTR",
+    symbol: "INTR",
+    decimals: 110,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 7}),
+  },
+  USDT: {
+    name: "USDT",
+    symbol: "USDT",
+    decimals: 6,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 2 }),
+  },
+  USDC: {
+    name: "USDC",
+    symbol: "USDC",
+    decimals: 6,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 5 }),
+  },
+  DOT: {
+    name: "DOT",
+    symbol: "DOT",
+    decimals: 10,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 0 }),
+  },
+  GLMR: {
+    name: "GLMR",
+    symbol: "GLMR",
+    decimals: 18,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 1 }),
+  },
+  vGLMR: {
+    name: "vGLMR",
+    symbol: "vGLMR",
+    decimals: 18,
+    ed: "10000000000",
+    toRaw: () => ({ VToken2: 1 }),
+  },
+  PINK: {
+    name: "PINK",
+    symbol: "PINK",
+    decimals: 10,
+    ed: "10000000000",
+    toRaw: () => ({ Token2:  10 }),
+  },
+  FIL: {
+    name: "FIL",
+    symbol: "FIL",
+    decimals: 18,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 4 }),
+  },
+  VMANTA: {
+    name: "VMANTA",
+    symbol: "VMANTA",
+    decimals: 18,
+    ed: "10000000000",
+    toRaw: () => ({ VToken2: 8 }),
+  },
+  VASTR: {
+    name: "VASTR",
+    symbol: "VASTR",
+    decimals: 18,
+    ed: "10000000000",
+    toRaw: () => ({ VToken2: 3 }),
+  },
+  VDOT: {
+    name: "VDOT",
+    symbol: "VDOT",
+    decimals: 10,
+    ed: "10000000000",
+    toRaw: () => ({ VToken2: 0 }),
+  },
+  ASTR: {
+    name: "ASTR",
+    symbol: "ASTR",
+    decimals: 18,
+    ed: "10000000000",
+    toRaw: () => ({ Token2: 3 }),
+  },
+  VSDOT: {
+    name: "VSDOT",
+    symbol: "VSDOT",
+    decimals: 10,
+    ed: "10000000000",
+    toRaw: () => ({ VSToken2: 0 }),
+  },
+}
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const createBalanceStorages = (api: AnyApi) => {
@@ -197,7 +333,7 @@ class BaseBifrostAdapter extends BaseCrossChainAdapter {
     this.balanceAdapter = new BifrostBalanceAdapter({
       chain: this.chain.id as ChainId,
       api,
-      tokens: bifrostTokensConfig,
+      tokens: this.tokens,
     });
   }
 
@@ -263,5 +399,11 @@ class BaseBifrostAdapter extends BaseCrossChainAdapter {
 export class BifrostAdapter extends BaseBifrostAdapter {
   constructor() {
     super(chains.bifrost, bifrostRouteConfigs, bifrostTokensConfig);
+  }
+}
+
+export class BifrostPolkadotAdapter extends BaseBifrostAdapter {
+  constructor() {
+    super(chains.bifrostPolkadot, bifrostRouteConfigs, bifrostPolkadotTokensConfig);
   }
 }

@@ -49,7 +49,15 @@ export const turingRouteConfigs = createRouteConfigs("turing", [
     },
   },
 ]);
-
+export const oakTokensConfig: Record<string, ExtendedToken> = {
+  TUR: {
+    name: "TUR",
+    symbol: "TUR",
+    decimals: 10,
+    ed: "100000000",
+    toRaw: () => "0",
+  }
+}
 export const turingTokensConfig: Record<string, ExtendedToken> = {
   TUR: {
     name: "TUR",
@@ -231,5 +239,10 @@ class BaseOakAdapter extends BaseCrossChainAdapter {
 export class TuringAdapter extends BaseOakAdapter {
   constructor() {
     super(chains.turing, turingRouteConfigs, turingTokensConfig);
+  }
+}
+export class OakAdapter extends BaseOakAdapter {
+  constructor() {
+    super(chains.oak, turingRouteConfigs, oakTokensConfig);
   }
 }

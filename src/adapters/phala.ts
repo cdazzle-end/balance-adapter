@@ -36,7 +36,15 @@ export const khalaRouteConfigs = createRouteConfigs("khala", [
     },
   },
 ]);
-
+export const phalaTokensConfig: Record<string, ExtendedToken> = {
+  PHA: {
+    name: "PHA",
+    symbol: "PHA",
+    decimals: 12,
+    ed: "40000000000",
+    toRaw: () => undefined,
+  },
+}
 export const khalaTokensConfig: Record<string, ExtendedToken> = {
   PHA: {
     name: "PHA",
@@ -262,5 +270,11 @@ class BasePhalaAdapter extends BaseCrossChainAdapter {
 export class KhalaAdapter extends BasePhalaAdapter {
   constructor() {
     super(chains.khala, khalaRouteConfigs, khalaTokensConfig);
+  }
+}
+
+export class PhalaAdapter extends BasePhalaAdapter {
+  constructor() {
+    super(chains.phala, khalaRouteConfigs, phalaTokensConfig);
   }
 }

@@ -15,28 +15,230 @@ import { ApiNotFound, TokenNotFound } from "../errors";
 
 type TokenData = ExtendedToken & { toQuery: () => string };
 
-export const moonbeamTokensConfig: Record<string, ExtendedToken> = {
+export const moonbeamTokensConfig: Record<string, TokenData> = {
   GLMR: {
     name: "GLMR",
     symbol: "GLMR",
     decimals: 18,
     ed: "100000000000000000",
     toRaw: () => ({ Native: "GLMR" }),
+  } as TokenData,
+  XCACA: { 
+    name: "ACA", 
+    symbol: "ACA", 
+    decimals: 12, 
+    ed: "100000000000", 
+    toRaw: ()=>{ Token: "ACA" },
+    toQuery: () => "224821240862170613278369189818311486111" 
   },
-  ACA: { name: "ACA", symbol: "ACA", decimals: 12, ed: "100000000000", toRaw() {
-    return { Token: "ACA" };
-  }, },
-  AUSD: { name: "AUSD", symbol: "AUSD", decimals: 12, ed: "100000000000", toRaw() { 
+  XCAUSD: { 
+    name: "AUSD", 
+    symbol: "AUSD", 
+    decimals: 12, 
+    ed: "100000000000", 
+    toRaw: ()=>{ Token: "AUSD" },
+    toQuery: () => "110021739665376159354538090254163045594" 
+  },
+  XCLDOT: { 
+    name: "XCLDOT", 
+    symbol: "XCLDOT", 
+    decimals: 10, 
+    ed: "100000000000", 
+    toRaw: ()=>{ Token: "LDOT" },
+    toQuery: () => "225719522181998468294117309041779353812" 
+  },
+  XCDOT: { 
+    name: "XCDOT", 
+    symbol: "XCDOT", 
+    decimals: 10, 
+    ed: "100000000000", 
+    toRaw: ()=>{ Token: "XCDOT" },
+    toQuery: () => "42259045809535163221576417993425387648" 
+  },
+  XCHDX: { 
+    name: "XCHDX", 
+    symbol: "XCHDX", 
+    decimals: 12, 
+    ed: "100000000000", 
+    toRaw: ()=>{ Token: "XCHDX" },
+    toQuery: () => "69606720909260275826784788104880799692" 
+  },
+   XCUSDT: { 
+    name: "USDT", 
+    symbol: "XCUSDT", 
+    decimals: 6, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "311091173110107856861649819128533077277" 
+  },
+  XCSUB: { 
+    name: "XCSUB", 
+    symbol: "XCSUB", 
+    decimals: 10, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "89994634370519791027168048838578580624" 
+  },
+  XCUSDC: { 
+    name: "XCUSDC", 
+    symbol: "XCUSDC", 
+    decimals: 6, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "166377000701797186346254371275954761085" 
+  },
+  XCASTAR: { 
+    name: "XCASTAR", 
+    symbol: "XCASTAR", 
+    decimals: 18, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "224077081838586484055667086558292981199" 
+  },
+  XCVDOT: { 
+    name: "XCVDOT", 
+    symbol: "XCVDOT", 
+    decimals: 10, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "29085784439601774464560083082574142143" 
+  },
+  XCEQ: { 
+    name: "XCEQ", 
+    symbol: "XCEQ", 
+    decimals: 9, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "190590555344745888270686124937537713878" 
+  },
+  XCEQD: { 
+    name: "XCEQD", 
+    symbol: "XCEQD", 
+    decimals: 9, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "187224307232923873519830480073807488153" 
+  },
+  XCCFG: { 
+    name: "XCCFG", 
+    symbol: "XCCFG", 
+    decimals: 18, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "91372035960551235635465443179559840483" 
+  },
+  XCRING: { 
+    name: "XCRING", 
+    symbol: "XCRING", 
+    decimals: 18, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "125699734534028342599692732320197985871" 
+  },
+  XCPDEX: { 
+    name: "XCPDEX", 
+    symbol: "XCPDEX", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "90225766094594282577230355136633846906" 
+  },
+  XCZTG: { 
+    name: "XCZTG", 
+    symbol: "XCZTG", 
+    decimals: 10, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "150874409661081770150564009349448205842" 
+  },
+  XCPHA: { 
+    name: "XCPHA", 
+    symbol: "XCPHA", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "132685552157663328694213725410064821485" 
+  },
+  XCOTP: { 
+    name: "XCOTP", 
+    symbol: "XCOTP", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "238111524681612888331172110363070489924" 
+  },
+  XCVASTR: { 
+    name: "XCVASTR", 
+    symbol: "XCVASTR", 
+    decimals: 18, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "114018676402354620972806895487280206446" 
+  },
+  XCPARA: { 
+    name: "XCPARA", 
+    symbol: "XCPARA", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "32615670524745285411807346420584982855" 
+  },
+  XCBNC: { 
+    name: "XCBNC", 
+    symbol: "XCBNC", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "165823357460190568952172802245839421906" 
+  },
+  XCINTR: { 
+    name: "XCINTR", 
+    symbol: "XCINTR", 
+    decimals: 10, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "101170542313601871197860408087030232491" 
+  },
+  XCMANTA: { 
+    name: "XCMANTA", 
+    symbol: "XCMANTA", 
+    decimals: 18, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "166446646689194205559791995948102903873" 
+  },
+  XCIBTC: { 
+    name: "XCIBTC", 
+    symbol: "XCIBTC", 
+    decimals: 8, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "120637696315203257380661607956669368914" 
+  },
+  XCNODL: { 
+    name: "XCNODL", 
+    symbol: "XCNODL", 
+    decimals: 11, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "309163521958167876851250718453738106865" 
+  },
+  XCPINK: { 
+    name: "XCPINK", 
+    symbol: "XCPINK", 
+    decimals: 10, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "64174511183114006009298114091987195453" 
+  },
+  XCIBCPICA: { 
+    name: "XCIBCPICA", 
+    symbol: "XCIBCPICA", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "228510780171552721666262089780561563481" 
+  },
+  XCIBCATOM: { 
+    name: "XCIBCATOM", 
+    symbol: "XCIBCATOM", 
+    decimals: 6, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "138280378441551394289980644963240827219" 
+  },
+  XCFIL: { 
+    name: "XCFIL", 
+    symbol: "XCFIL", 
+    decimals: 18, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "144012926827374458669278577633504620722" 
+  },
+  XCPEN: { 
+    name: "XCPEN", 
+    symbol: "XCPEN", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "45647473099451451833602657905356404688" 
+  },
 
-  }
-   },
-  LDOT: { name: "LDOT", symbol: "LDOT", decimals: 10, ed: "500000000", toRaw() {
-      
-  }, },
-  DOT: { name: "DOT", symbol: "DOT", decimals: 10, ed: "10000000000", toRaw() {
-
-  }
-   },
 };
 
 export const moonriverTokensConfig: Record<string, TokenData> = {
@@ -53,6 +255,13 @@ export const moonriverTokensConfig: Record<string, TokenData> = {
     decimals: 12, ed: "0",
     toRaw: () => "KAR",
     toQuery: () => "10810581592933651521121702237638664357" 
+  },
+  XCBNC: { 
+    name: "XCBNC", 
+    symbol: "XCBNC", 
+    decimals: 12, ed: "0",
+    toRaw: () => "",
+    toQuery: () => "319623561105283008236062145480775032445" 
   },
   XCKINT: { 
     name: "Kintsugi", 
@@ -250,8 +459,8 @@ class MoonbeamBalanceAdapter extends BalanceAdapter {
       );
     }
 
-    console.log("SEARCHING FOR TOKEN", token)
-    console.log("TOKEN LIST " + JSON.stringify(this.tokens))
+    // console.log("SEARCHING FOR TOKEN", token)
+    // console.log("TOKEN LIST " + JSON.stringify(this.tokens))
     const tokenData: TokenData = this.getToken(token);
 
     if (!tokenData) throw new TokenNotFound(token);

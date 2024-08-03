@@ -41,7 +41,16 @@ const shadowRouteConfigs = createRouteConfigs("shadow", [
     },
   },
 ]);
-
+export const crustTokensConfig: Record<string, ExtendedToken> = {
+  CSM: {
+    name: "CSM",
+    symbol: "CSM",
+    decimals: 12,
+    ed: "100000000000",
+    // just for type checking
+    toRaw: () => "SelfReserve",
+  },
+}
 export const shadowTokensConfig: Record<string, ExtendedToken> = {
   CSM: {
     name: "CSM",
@@ -215,5 +224,11 @@ class BaseCrustAdapter extends BaseCrossChainAdapter {
 export class ShadowAdapter extends BaseCrustAdapter {
   constructor() {
     super(chains.shadow, shadowRouteConfigs, shadowTokensConfig);
+  }
+}
+
+export class CrustAdapter extends BaseCrustAdapter {
+  constructor() {
+    super(chains.crust, shadowRouteConfigs, crustTokensConfig);
   }
 }

@@ -77,6 +77,13 @@ export const interlayTokensConfig: Record<
       ed: "0",
       toRaw: () => ({ Token: "IBTC" }),
     },
+    HDX: {
+      name: "HDX",
+      symbol: "HDX",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => ({ ForeignAsset: 13 }),
+    },
   },
   kintsugi: {
     KINT: {

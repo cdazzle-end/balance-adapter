@@ -23,5 +23,9 @@ export * from "./statemint";
 export * from "./tinkernet";
 export * from "./unique";
 export * from "./zeitgeist";
+export * from "./subsocial";
+export * from "./nodle";
+export * from "./pendulum";
+export * from "./kilt";
 
 

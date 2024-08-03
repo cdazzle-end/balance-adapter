@@ -1,5 +1,6 @@
-import { isEmpty, overEvery, uniqWith } from "lodash";
-
+// import { isEmpty, overEvery, uniqWith } from "lodash";
+import lodashPkg from 'lodash';
+const{isEmpty, overEvery, uniqWith } = lodashPkg;
 import { isChainEqual } from "./utils/is-chain-equal";
 import { BaseCrossChainAdapter } from "./base-chain-adapter";
 import { ChainId, chains } from "./configs";

@@ -102,6 +102,63 @@ export const parallelTokensConfig: Record<
       ed: "500000000",
       toRaw: () => "110",
     },
+    DOT: {
+      name: "DOT",
+      symbol: "DOT",
+      decimals: 10,
+      ed: "500000000",
+      toRaw: () => "101",
+    },
+    INTR: {
+      name: "INTR",
+      symbol: "INTR",
+      decimals: 10,
+      ed: "500000000",
+      toRaw: () => "120",
+    },
+    IBTC: {
+      name: "IBTC",
+      symbol: "IBTC",
+      decimals: 8,
+      ed: "500000000",
+      toRaw: () => "122",
+    },
+    USDT: {
+      name: "USDT",
+      symbol: "USDT",
+      decimals: 6,
+      ed: "500000000",
+      toRaw: () => "102",
+    },
+    LCDOT: {
+      name: "LCDOT",
+      symbol: "LCDOT",
+      decimals: 10,
+      ed: "500000000",
+      toRaw: () => "106",
+    },
+    GLMR: {
+      name: "GLMR",
+      symbol: "GLMR",
+      decimals: 18,
+      ed: "500000000",
+      toRaw: () => "114",
+    },
+    ASTAR: {
+      name: "ASTAR",
+      symbol: "ASTAR",
+      decimals: 18,
+      ed: "500000000",
+      toRaw: () => "112",
+    },
+    PHA: {
+      name: "PHA",
+      symbol: "PHA",
+      decimals: 12,
+      ed: "500000000",
+      toRaw: () => "115",
+    },
+    
   },
   heiko: {
     HKO: {
@@ -132,6 +189,48 @@ export const parallelTokensConfig: Record<
       ed: "0",
       toRaw: () => "109",
     },
+    KSM: {
+      name: "KSM",
+      symbol: "KSM",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => "100",
+    },
+    USDT: {
+      name: "USDT",
+      symbol: "USDT",
+      decimals: 6,
+      ed: "0",
+      toRaw: () => "102",
+    },
+    KINT: {
+      name: "KINT",
+      symbol: "KINT",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => "119",
+    },
+    PHA: {
+      name: "PHA",
+      symbol: "PHA",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => "115",
+    },
+    MOVR: {
+      name: "PHA",
+      symbol: "PHA",
+      decimals: 18,
+      ed: "0",
+      toRaw: () => "113",
+    },
+    KBTC: {
+      name: "PHA",
+      symbol: "PHA",
+      decimals: 8,
+      ed: "0",
+      toRaw: () => "121",
+    }
   },
 };
 

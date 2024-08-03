@@ -31,13 +31,84 @@ export const mangataTokensConfig: Record<string, ExtendedToken> = {
       ed: "1",
       toRaw: () => (0),
     },
+    ZLK: {
+      name: "Zenlink",
+      symbol: "ZLK",
+      decimals: 18,
+      ed: "1",
+      toRaw: () => (26),
+    },
+    // KSM: {
+    //   name: "KSM",
+    //   symbol: "KSM",
+    //   decimals: 12,
+    //   ed: "100000000",
+    //   toRaw: () => ({ Token: "KSM" }),
+    // }
     KSM: {
       name: "KSM",
       symbol: "KSM",
       decimals: 12,
-      ed: "100000000",
-      toRaw: () => ({ Token: "KSM" }),
+      ed: "0",
+      toRaw: () => (4),
+    },
+    BNC: {
+      name: "BNC",
+      symbol: "BNC",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => (14),
+    },
+    VBNC: {
+      name: "VBNC",
+      symbol: "VBNC",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => (23),
+    },
+    VKSM: {
+      name: "VKSM",
+      symbol: "VKSM",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => (15),
+    },
+    VSKSM: {
+      name: "VSKSM",
+      symbol: "VSKSM",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => (16),
+    },
+    RMRK: {
+      name: "RMRK",
+      symbol: "RMRK",
+      decimals: 10,
+      ed: "0",
+      toRaw: () => (31),
+    },
+    MOVR: {
+      name: "MOVR",
+      symbol: "MOVR",
+      decimals: 18,
+      ed: "0",
+      toRaw: () => (39),
+    },
+    TUR: {
+      name: "TUR",
+      symbol: "TUR",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => (7),
+    },
+    IMBU: {
+      name: "IMBU",
+      symbol: "IMBU",
+      decimals: 12,
+      ed: "0",
+      toRaw: () => (11),
     }
+
 };
 
 

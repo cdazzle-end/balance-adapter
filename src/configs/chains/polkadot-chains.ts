@@ -6,6 +6,13 @@ export const polkadotChains = {
     paraChainId: -1,
     ss58Prefix: 0,
   },
+  bifrostPolkadot: {
+    display: "Polkadot",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fpolkadot.png&w=96&q=75",
+    paraChainId: 2030,
+    ss58Prefix: 0,
+  },
   statemint: {
     display: "Statemint",
     type: "substrate",
@@ -75,5 +82,75 @@ export const polkadotChains = {
     icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
     paraChainId: 2031,
     ss58Prefix: 36,
+  },
+  phala: {
+    display: "Phala",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2035,
+    ss58Prefix: 36, // *
+  },
+  crust: {
+    display: "Crust",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2008,
+    ss58Prefix: 36, // *
+  },
+  manta: {
+    display: "Manta",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2104,
+    ss58Prefix: 36, // *
+  },
+  darwinia: {
+    display: "Darwinia",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2046,
+    ss58Prefix: 36, // *
+  },
+  oak: {
+    display: "Oak",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2090,
+    ss58Prefix: 36, // *
+  },
+  invarch: {
+    display: "Invarch",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 3340,
+    ss58Prefix: 117, 
+  },
+  kilt: {
+    display: "Kilt",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2086,
+    ss58Prefix: 63, 
+  },
+  subsocial: {
+    display: "Subsocial",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2101,
+    ss58Prefix: 63, 
+  },
+  pendulum: {
+    display: "Pendulum",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2094,
+    ss58Prefix: 63, 
+  },
+  nodle: {
+    display: "Nodle",
+    type: "substrate",
+    icon: "https://resources.acala.network/_next/image?url=%2Fnetworks%2Fcentrifuge.png&w=96&q=75",
+    paraChainId: 2026,
+    ss58Prefix: 63, 
   },
 };
