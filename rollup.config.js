@@ -35,6 +35,7 @@ export default [
         presets: ['@babel/preset-env'],
         extensions: ['.js', '.ts'],
       }),
+      addJsExtension(),
       nodeResolve({
         extensions: ['.js', '.ts'],
         preferBuiltins: true
