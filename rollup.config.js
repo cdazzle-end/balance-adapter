@@ -27,7 +27,7 @@ export default [
         { file: './dist/index.mjs', format: 'es' }
       ],
     plugins: [
-      json(),
+      // json(),
       typescript(), // Compile TypeScript files
       // babel({
       //   plugins: ['@babel/plugin-syntax-import-assertions'],
