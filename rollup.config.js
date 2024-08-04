@@ -47,10 +47,10 @@ export default [
       // Handling extension issues
       addJsExtension(),
 
-      nodeResolve({
-        extensions: ['.js', '.ts'],
-        preferBuiltins: true
-      }),
+      // nodeResolve({
+      //   extensions: ['.js', '.ts'],
+      //   preferBuiltins: true
+      // }),
     ],
     external: [
       /^@polkadot\//,
