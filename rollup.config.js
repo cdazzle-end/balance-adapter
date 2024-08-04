@@ -29,12 +29,12 @@ export default [
     plugins: [
       json(),
       typescript(), // Compile TypeScript files
-      babel({
-        plugins: ['@babel/plugin-syntax-import-assertions'],
-        babelHelpers: 'bundled',
-        presets: ['@babel/preset-env'],
-        extensions: ['.js', '.ts'],
-      }),
+      // babel({
+      //   plugins: ['@babel/plugin-syntax-import-assertions'],
+      //   babelHelpers: 'bundled',
+      //   presets: ['@babel/preset-env'],
+      //   extensions: ['.js', '.ts'],
+      // }),
       addJsExtension(),
       nodeResolve({
         extensions: ['.js', '.ts'],
