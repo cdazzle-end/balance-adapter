@@ -3,22 +3,29 @@ import babel from '@rollup/plugin-babel';
 import json from '@rollup/plugin-json';
 import dts from 'rollup-plugin-dts';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import alias from '@rollup/plugin-alias';
+import path from 'path';
 
-function addJsExtension() {
-  return {
-    name: 'add-js-extension',
-    resolveId(source, importer) {
-      if (source.startsWith('@acala-network/sdk/')) {
-        return {
-          id: source + '.js',
-          external: true
-        };
-      }
-      return null;
-    }
-  };
-}
-
+// function addJsExtension() {
+//   return {
+//     name: 'add-js-extension',
+//     resolveId(source, importer) {
+//       if (source.startsWith('@acala-network/sdk/')) {
+//         return {
+//           id: source + '.js',
+//           external: true
+//         };
+//       }
+//       return null;
+//     }
+//   };
+// }
+const customAliases = alias({
+  entries: [
+    { find: '@acala-network/sdk/wallet', replacement: '@acala-network/sdk/wallet.js' },
+    { find: '@acala-network/sdk/utils/storage', replacement: '@acala-network/sdk/utils/storage.js' }
+  ]
+});
 export default [
   {
     input: './src/index.ts', // Your main TypeScript file
@@ -27,7 +34,7 @@ export default [
         { file: './dist/index.mjs', format: 'es' }
       ],
     plugins: [
-      // json(),
+      json(),
       typescript(), // Compile TypeScript files
       // babel({
       //   plugins: ['@babel/plugin-syntax-import-assertions'],
@@ -35,7 +42,10 @@ export default [
       //   presets: ['@babel/preset-env'],
       //   extensions: ['.js', '.ts'],
       // }),
-      addJsExtension(),
+
+      // Handling extension issues
+      // addJsExtension(),
+      customAliases,
       nodeResolve({
         extensions: ['.js', '.ts'],
         preferBuiltins: true
