@@ -45,7 +45,7 @@ export default [
       }),
 
       // Handling extension issues
-      addJsExtension(),
+      // addJsExtension(),
 
       // nodeResolve({
       //   extensions: ['.js', '.ts'],
