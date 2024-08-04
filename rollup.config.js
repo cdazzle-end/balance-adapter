@@ -34,6 +34,7 @@ export default [
         { file: './dist/index.mjs', format: 'es' }
       ],
     plugins: [
+      customAliases,
       json(),
       typescript(), // Compile TypeScript files
       // babel({
@@ -45,7 +46,7 @@ export default [
 
       // Handling extension issues
       // addJsExtension(),
-      customAliases,
+
       nodeResolve({
         extensions: ['.js', '.ts'],
         preferBuiltins: true
