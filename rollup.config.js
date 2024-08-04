@@ -52,13 +52,13 @@ export default [
         preferBuiltins: true
       }),
     ],
-    // external: [
-    //   /^@polkadot\//,
+    external: [
+      /^@polkadot\//,
     //   /^@acala-network\//,
-    //   'axios',
-    //   'lodash',
-    //   'ethers'
-    // ]
+      'axios',
+      'lodash',
+      'ethers'
+    ]
   },
   {
     input: 'src/index.ts',
