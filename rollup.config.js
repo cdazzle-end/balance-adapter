@@ -37,12 +37,12 @@ export default [
       // customAliases,
       json(),
       typescript(), // Compile TypeScript files
-      // babel({
-      //   plugins: ['@babel/plugin-syntax-import-assertions'],
-      //   babelHelpers: 'bundled',
-      //   presets: ['@babel/preset-env'],
-      //   extensions: ['.js', '.ts'],
-      // }),
+      babel({
+        plugins: ['@babel/plugin-syntax-import-assertions'],
+        babelHelpers: 'bundled',
+        presets: ['@babel/preset-env'],
+        extensions: ['.js', '.ts'],
+      }),
 
       // Handling extension issues
       addJsExtension(),
@@ -52,13 +52,13 @@ export default [
       //   preferBuiltins: true
       // }),
     ],
-    external: [
-      /^@polkadot\//,
+    // external: [
+    //   /^@polkadot\//,
     //   /^@acala-network\//,
-      'axios',
-      'lodash',
-      'ethers'
-    ]
+    //   'axios',
+    //   'lodash',
+    //   'ethers'
+    // ]
   },
   {
     input: 'src/index.ts',
