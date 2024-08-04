@@ -6,19 +6,19 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
 
-function addJsExtension() {
+let isMjsOutput = false; // Flag to track if we're generating .mjs output
+function addJsExtension(isMjsOutput) {
   return {
     name: 'add-js-extension',
     resolveId(source, importer) {
       // Check if the output format is 'es' (for .mjs)
-      if (this.getModuleInfo(importer).isEntry && this.getOutputOptions().format === 'es') {
-        if (source.startsWith('@acala-network/sdk/')) {
+        if (isMjsOutput && source.startsWith('@acala-network/sdk/')) {
           return {
             id: source + '.js',
             external: true
           };
         }
-      }
+      
       return null;
     }
   };
@@ -29,11 +29,30 @@ const customAliases = alias({
     { find: '@acala-network/sdk/utils/storage', replacement: '@acala-network/sdk/utils/storage.js' }
   ]
 });
+// Handle mjs and cjs differently so we can add the proper file extensiosn to the mjs imports
 export default [
+  // cjs
+  {
+    input: './src/index.ts',
+    output: {
+      file: './dist/index.cjs',
+      format: 'cjs',
+    },
+    plugins: [
+      json(),
+      typescript(),
+      babel({
+        plugins: ['@babel/plugin-syntax-import-assertions'],
+        babelHelpers: 'bundled',
+        presets: ['@babel/preset-env'],
+        extensions: ['.js', '.ts'],
+      }),
+    ]
+  },
+  // mjs
   {
     input: './src/index.ts', // Your main TypeScript file
     output: [
-        { file: './dist/index.cjs', format: 'cjs' },
         { file: './dist/index.mjs', format: 'es' }
       ],
     plugins: [
@@ -48,20 +67,8 @@ export default [
       }),
 
       // Handling extension issues
-      addJsExtension(),
-
-      // nodeResolve({
-      //   extensions: ['.js', '.ts'],
-      //   preferBuiltins: true
-      // }),
+      addJsExtension(true),
     ],
-    // external: [
-    //   /^@polkadot\//,
-    //   /^@acala-network\//,
-    //   'axios',
-    //   'lodash',
-    //   'ethers'
-    // ]
   },
   {
     input: 'src/index.ts',
