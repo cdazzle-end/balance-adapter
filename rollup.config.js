@@ -2,6 +2,7 @@ import typescript from 'rollup-plugin-typescript2'
 import babel from '@rollup/plugin-babel';
 import json from '@rollup/plugin-json';
 import dts from 'rollup-plugin-dts';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default [
   {
@@ -18,6 +19,9 @@ export default [
         babelHelpers: 'bundled',
         presets: ['@babel/preset-env'],
         extensions: ['.js', '.ts'],
+      }),
+      nodeResolve({
+        extensions: ['.js', '.ts'] // Add any other extensions you're using
       }),
     ],
   },
