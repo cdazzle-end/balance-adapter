@@ -20,9 +20,9 @@ export default [
         presets: ['@babel/preset-env'],
         extensions: ['.js', '.ts'],
       }),
-      nodeResolve({
-        extensions: ['.js', '.ts'] // Add any other extensions you're using
-      }),
+      // nodeResolve({
+      //   extensions: ['.js', '.ts'] // Add any other extensions you're using
+      // }),
     ],
   },
   {
