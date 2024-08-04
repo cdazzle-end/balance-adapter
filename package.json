@@ -67,6 +67,7 @@
     "@open-web3/dev-config": "^0.2.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/jest": "^28.1.1",
     "@types/lodash": "^4.14.161",
