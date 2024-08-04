@@ -449,6 +449,13 @@ export const hydradxTokensConfig: Record<string, ExtendedToken> = {
     ed: "32467532467532500",
     toRaw: () => 31,
   },
+  ACA: {
+    name: "ACA",
+    symbol: "ACA",
+    decimals: 12,
+    ed: "32467532467532500",
+    toRaw: () => 1000099,
+  },
   "100": {
     name: "4-POOL",
     symbol: "4-POOL",
