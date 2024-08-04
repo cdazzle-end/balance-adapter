@@ -10,11 +10,14 @@ function addJsExtension() {
   return {
     name: 'add-js-extension',
     resolveId(source, importer) {
-      if (source.startsWith('@acala-network/sdk/')) {
-        return {
-          id: source + '.js',
-          external: true
-        };
+      // Check if the output format is 'es' (for .mjs)
+      if (this.getModuleInfo(importer).isEntry && this.getOutputOptions().format === 'es') {
+        if (source.startsWith('@acala-network/sdk/')) {
+          return {
+            id: source + '.js',
+            external: true
+          };
+        }
       }
       return null;
     }
@@ -45,7 +48,7 @@ export default [
       }),
 
       // Handling extension issues
-      // addJsExtension(),
+      addJsExtension(),
 
       // nodeResolve({
       //   extensions: ['.js', '.ts'],
