@@ -6,20 +6,20 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
 
-// function addJsExtension() {
-//   return {
-//     name: 'add-js-extension',
-//     resolveId(source, importer) {
-//       if (source.startsWith('@acala-network/sdk/')) {
-//         return {
-//           id: source + '.js',
-//           external: true
-//         };
-//       }
-//       return null;
-//     }
-//   };
-// }
+function addJsExtension() {
+  return {
+    name: 'add-js-extension',
+    resolveId(source, importer) {
+      if (source.startsWith('@acala-network/sdk/')) {
+        return {
+          id: source + '.js',
+          external: true
+        };
+      }
+      return null;
+    }
+  };
+}
 const customAliases = alias({
   entries: [
     { find: '@acala-network/sdk/wallet', replacement: '@acala-network/sdk/wallet.js' },
@@ -34,7 +34,7 @@ export default [
         { file: './dist/index.mjs', format: 'es' }
       ],
     plugins: [
-      customAliases,
+      // customAliases,
       json(),
       typescript(), // Compile TypeScript files
       // babel({
@@ -45,7 +45,7 @@ export default [
       // }),
 
       // Handling extension issues
-      // addJsExtension(),
+      addJsExtension(),
 
       nodeResolve({
         extensions: ['.js', '.ts'],
