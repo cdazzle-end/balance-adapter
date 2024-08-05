@@ -37,6 +37,8 @@ export abstract class BalanceAdapter {
     // If token not ibn bridge database, check for asset in our asset registry. if it exists, create a new BasicToken with the appropriate values
 
     if (!tokenConfig) throw new TokenNotFound(token, this.chain);
+    // Get chain number
+    
 
     return tokenConfig as R;
   }
