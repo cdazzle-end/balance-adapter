@@ -10,10 +10,10 @@ import { BalanceAdapter, BalanceAdapterConfigs } from "../balance-adapter";
 import { BaseCrossChainAdapter } from "../base-chain-adapter";
 import { ChainId, chains } from "../configs";
 import { ApiNotFound, InvalidAddress, TokenNotFound } from "../errors";
-import { BalanceData, ExtendedToken, TransferParams } from "../types";
+import { BalanceData, ExtendedToken, TokenData, TransferParams } from "../types";
 import { validateAddress, createRouteConfigs } from "../utils";
 
-type TokenData = ExtendedToken & { toQuery: () => string };
+
 
 export const astarRouteConfigs = createRouteConfigs("astar", [
   {
@@ -160,7 +160,8 @@ class AstarBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     const storage = this.storages.balances(address);
 
@@ -181,7 +182,7 @@ class AstarBalanceAdapter extends BalanceAdapter {
       );
     }
 
-    const tokenData: TokenData = this.getToken(token);
+    const tokenData: TokenData = this.getToken(token, tokenId);
 
     if (!tokenData) throw new TokenNotFound(token);
 
@@ -222,13 +223,14 @@ class BaseAstarAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
     }
 
-    return this.balanceAdapter.subscribeBalance(token, address);
+    return this.balanceAdapter.subscribeBalance(token, address, tokenId);
   }
 
   public subscribeMaxInput(

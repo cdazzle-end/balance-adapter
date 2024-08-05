@@ -96,7 +96,8 @@ class PolkadotBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!validateAddress(address)) throw new InvalidAddress(address);
 
@@ -139,7 +140,8 @@ class BasePolkadotAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);

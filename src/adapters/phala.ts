@@ -99,7 +99,8 @@ class PhalaBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     const storage = this.storages.balances(address);
 
@@ -124,13 +125,13 @@ class PhalaBalanceAdapter extends BalanceAdapter {
       KAR: 1,
       KUSD: 4,
     };
-    const tokenId = SUPPORTED_TOKENS[token];
+    const phalaTokenId = SUPPORTED_TOKENS[token];
 
-    if (tokenId === undefined) {
+    if (phalaTokenId === undefined) {
       throw new TokenNotFound(token);
     }
 
-    return this.storages.assets(tokenId, address).observable.pipe(
+    return this.storages.assets(phalaTokenId, address).observable.pipe(
       map((balance) => {
         const amount = FN.fromInner(
           balance.unwrapOrDefault()?.balance?.toString() || "0",
@@ -165,13 +166,14 @@ class BasePhalaAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
     }
 
-    return this.balanceAdapter.subscribeBalance(token, address);
+    return this.balanceAdapter.subscribeBalance(token, address, tokenId);
   }
 
   public subscribeMaxInput(

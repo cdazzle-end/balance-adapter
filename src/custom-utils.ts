@@ -1,5 +1,14 @@
 import { PolkadotAdapter, KiltAdapter, PendulumAdapter, NodleAdapter, SubsocialAdapter, BifrostPolkadotAdapter, ListenAdapter, KicoAdapter, KaruraAdapter, ShidenAdapter, BifrostAdapter, AltairAdapter, ShadowAdapter, CrabAdapter, BasiliskAdapter, IntegriteeAdapter, KintsugiAdapter, PichiuAdapter, MangataAdapter, CalamariAdapter, MoonriverAdapter, TuringAdapter, HeikoAdapter, KhalaAdapter, KusamaAdapter, RobonomicsAdapter, StatemineAdapter, TinkernetAdapter, QuartzAdapter, StatemintAdapter, AcalaAdapter, HydraDxAdapter, InterlayAdapter, MoonbeamAdapter, ParallelAdapter, UniqueAdapter, CentrifugeAdapter, AstarAdapter, PhalaAdapter, CrustAdapter, MantaAdapter, DarwiniaAdapter, OakAdapter, InvarchAdapter, ZeitgeistAdapter} from './adapters/index'
-type Relay = "kusama" | "polkadot"
+import { BasicToken, ExtendedToken, MyAssetRegistryObject, Relay, TokenData } from './types'
+import fs from 'fs'
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { ChainId } from './configs';
+import { kusamaChains } from './configs/chains/kusama-chains';
+import { polkadotChains } from './configs/chains/polkadot-chains';
+import { AssetObjectNotFound } from './errors';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export function getAdapter(relay: Relay, paraId: number){
     if( relay == "kusama"){
         if(paraId == 0){
@@ -150,4 +159,74 @@ export function getAdapter(relay: Relay, paraId: number){
             
         // }
     }
+}
+
+export function getAssetRegistryObject(paraId: number, localId: string, relay: Relay): MyAssetRegistryObject{
+    let assetRegistry = getAssetRegistry(relay)
+    let asset = assetRegistry.find((assetRegistryObject: MyAssetRegistryObject) => {
+        if(paraId == 0 && assetRegistryObject.tokenData.chain == 0){
+            return true
+        }
+        // console.log(JSON.stringify(assetRegistryObject.tokenData.localId).replace(/\\|"/g, ""))
+        return assetRegistryObject.tokenData.chain == paraId && JSON.stringify(assetRegistryObject.tokenData.localId).replace(/\\|"/g, "") == localId
+    })
+    if(asset == undefined){
+        // throw new Error(`Balance Adapter: Asset not found in registry: chainId: ${paraId}, localId: ${localId} | localId stringify: ${JSON.stringify(localId)}`)
+        throw new AssetObjectNotFound(localId, paraId)
+    }
+    return asset
+}
+
+export function getAssetRegistry(relay: Relay){
+    // let assetRegistry: MyAssetRegistryObject[] = relay === 'kusama' ? JSON.parse(fs.readFileSync(path.join(__dirname, '../../allAssets.json'), 'utf8')) : JSON.parse(fs.readFileSync(path.join(__dirname, '../../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'), 'utf8'));
+    let assetRegistryPath = relay === 'kusama' ? '../../allAssets.json' : '../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'
+    let assetRegistry: MyAssetRegistryObject[] = JSON.parse(fs.readFileSync(path.join(__dirname, assetRegistryPath), 'utf8'));
+    return assetRegistry
+}
+
+export function getRelayForChainId(chainId: ChainId): Relay{
+    // Ensure chainId is of the correct type
+    if (chainId in kusamaChains) {
+        return 'kusama';
+    } else if (chainId in polkadotChains) {
+        return 'polkadot';
+    } else {
+        throw new Error(`Chain ID ${chainId} not found in any relay.`);
+    }
+    
+    
+}
+
+export function createBasicTokenFromAsset(asset: MyAssetRegistryObject): BasicToken{
+    let basicToken: BasicToken = {
+        name: asset.tokenData.name,
+        symbol: asset.tokenData.symbol,
+        decimals: Number.parseInt(asset.tokenData.decimals),
+        ed: '0'
+    }
+    return basicToken
+}
+
+export function createExtendedTokenFromAsset(asset: MyAssetRegistryObject): ExtendedToken{
+    let extendedToken: ExtendedToken = {
+        name: asset.tokenData.name,
+        symbol: asset.tokenData.symbol,
+        decimals: Number.parseInt(asset.tokenData.decimals),
+        ed: '0',
+        toRaw: () => asset.tokenData.localId
+    }
+    return extendedToken
+}
+
+export function createTokenDataFromAsset(asset: MyAssetRegistryObject): TokenData{
+    let tokenData: TokenData = {
+        name: asset.tokenData.name,
+        symbol: asset.tokenData.symbol,
+        decimals: Number.parseInt(asset.tokenData.decimals),
+        ed: '0',
+        toRaw: () => "",
+        toQuery: () => asset.tokenData.localId
+
+    }
+    return tokenData
 }

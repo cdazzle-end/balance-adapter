@@ -508,7 +508,8 @@ class HydradxBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     tokenName: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     const storage = this.storages.balances(address);
 
@@ -529,7 +530,7 @@ class HydradxBalanceAdapter extends BalanceAdapter {
       );
     }
 
-    const token = this.getToken<ExtendedToken>(tokenName);
+    const token = this.getToken<ExtendedToken>(tokenName, tokenId);
 
     return this.storages.assets(token.toRaw(), address).observable.pipe(
       map((balance) => {
@@ -566,13 +567,14 @@ class BaseHydradxAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
     }
 
-    return this.balanceAdapter.subscribeBalance(token, address);
+    return this.balanceAdapter.subscribeBalance(token, address, tokenId);
   }
 
   public subscribeMaxInput(

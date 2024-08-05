@@ -122,7 +122,8 @@ class KylinBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!validateAddress(address)) throw new InvalidAddress(address);
 
@@ -145,7 +146,7 @@ class KylinBalanceAdapter extends BalanceAdapter {
       );
     }
 
-    const tokenData: ExtendedToken = this.getToken(token);
+    const tokenData: ExtendedToken = this.getToken(token, tokenId);
 
     if (!tokenData) throw new TokenNotFound(token);
 
@@ -184,13 +185,14 @@ class BaseKylinAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
     }
 
-    return this.balanceAdapter.subscribeBalance(token, address);
+    return this.balanceAdapter.subscribeBalance(token, address, tokenId);
   }
 
   public subscribeMaxInput(

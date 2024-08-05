@@ -168,7 +168,8 @@ class StatemintBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     tokenName: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!validateAddress(address)) throw new InvalidAddress(address);
 
@@ -191,7 +192,7 @@ class StatemintBalanceAdapter extends BalanceAdapter {
       );
     }
 
-    const token: ExtendedToken = this.getToken(tokenName);
+    const token: ExtendedToken = this.getToken(tokenName, tokenId);
 
     if (!token) throw new TokenNotFound(tokenName);
 
@@ -235,13 +236,14 @@ class BaseStatemintAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
     }
 
-    return this.balanceAdapter.subscribeBalance(token, address);
+    return this.balanceAdapter.subscribeBalance(token, address, tokenId);
   }
 
   public subscribeMaxInput(

@@ -26,7 +26,7 @@ const centrifugeRouteConfigs = createRouteConfigs("centrifuge", [
   },
 ]);
 
-export const centrifugeTokensonfigs: Record<string, ExtendedToken> = {
+export const centrifugeTokensConfig: Record<string, ExtendedToken> = {
   CFG: {
     name: "CFG",
     symbol: "CFG",
@@ -100,7 +100,8 @@ class CentrifugeBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     name: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!validateAddress(address)) throw new InvalidAddress(address);
 
@@ -123,7 +124,7 @@ class CentrifugeBalanceAdapter extends BalanceAdapter {
       );
     }
 
-    const token = this.getToken<ExtendedToken>(name);
+    const token = this.getToken<ExtendedToken>(name, tokenId);
 
     return this.storages.assets(address, token.toRaw()).observable.pipe(
       map((balance) => {
@@ -160,13 +161,14 @@ class BaseCentrifugeAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
     }
 
-    return this.balanceAdapter.subscribeBalance(token, address);
+    return this.balanceAdapter.subscribeBalance(token, address, tokenId);
   }
 
   public subscribeMaxInput(
@@ -225,6 +227,6 @@ export class AltairAdapter extends BaseCentrifugeAdapter {
 
 export class CentrifugeAdapter extends BaseCentrifugeAdapter {
   constructor() {
-    super(chains.centrifuge, centrifugeRouteConfigs, centrifugeTokensonfigs);
+    super(chains.centrifuge, centrifugeRouteConfigs, centrifugeTokensConfig);
   }
 }

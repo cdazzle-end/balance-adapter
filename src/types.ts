@@ -33,6 +33,8 @@ export interface ExtendedToken extends BasicToken {
   toRaw: () => any;
 }
 
+export type TokenData = ExtendedToken & { toQuery: () => string };
+
 export interface RouteConfigs {
   // from chain name
   from: ChainId;
@@ -127,3 +129,25 @@ export interface BalanceData {
   reserved: FixedPointNumber;
   available: FixedPointNumber;
 }
+
+// Custom Data Types
+export interface MyAssetRegistryObject {
+  tokenData: MyAsset,
+  hasLocation: boolean;
+  tokenLocation?: string;
+}
+
+export interface MyAsset {
+  network: string;
+  chain: number;
+  localId: string;
+  name: string;
+  symbol: string;
+  decimals: string;
+  minimalBalance?: string;
+  deposit?: string;
+  isFrozen?: boolean;
+  contractAddress?: string;
+}
+
+export type Relay = "kusama" | "polkadot"

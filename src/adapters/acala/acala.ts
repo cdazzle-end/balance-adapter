@@ -68,7 +68,8 @@ class BaseAcalaAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.wallet) {
       throw new ApiNotFound(this.chain.id);

@@ -39,6 +39,16 @@ export class TokenNotFound extends Error {
   }
 }
 
+export class AssetObjectNotFound extends Error{
+  constructor(tokenId: string, paraId: number){
+    super();
+
+    let idStringified = `${JSON.stringify(tokenId)}`
+    this.message = `BalanceAdapter: TokenNotFound and can't find asset in asset registry. | token id: ${tokenId} | para id: ${paraId} | stringified: ${idStringified} `
+    this.name = 'AssetObjectNotFound'
+  }
+}
+
 export class NoCrossChainAdapterFound extends Error {
   constructor(name: string) {
     super();

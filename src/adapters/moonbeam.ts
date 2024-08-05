@@ -5,15 +5,13 @@ import { ISubmittableResult } from "@polkadot/types/types";
 
 import { BaseCrossChainAdapter } from "../base-chain-adapter";
 import { ChainId, chains } from "../configs";
-import { BalanceData, ExtendedToken, TransferParams } from "../types";
+import { BalanceData, ExtendedToken, TokenData, TransferParams } from "../types";
 // import { map } from "lodash";
 import { map, Observable } from "rxjs";
 import { BalanceAdapter, BalanceAdapterConfigs } from "../balance-adapter";
 import { ApiNotFound, TokenNotFound } from "../errors";
 
 
-
-type TokenData = ExtendedToken & { toQuery: () => string };
 
 export const moonbeamTokensConfig: Record<string, TokenData> = {
   GLMR: {
@@ -441,7 +439,8 @@ class MoonbeamBalanceAdapter extends BalanceAdapter {
 
   public subscribeBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     const storage = this.storages.balances(address);
 
@@ -461,7 +460,7 @@ class MoonbeamBalanceAdapter extends BalanceAdapter {
 
     // console.log("SEARCHING FOR TOKEN", token)
     // console.log("TOKEN LIST " + JSON.stringify(this.tokens))
-    const tokenData: TokenData = this.getToken(token);
+    const tokenData: TokenData = this.getToken(token, tokenId);
 
     if (!tokenData) throw new TokenNotFound(token);
 
@@ -503,13 +502,14 @@ class BaseMoonbeamAdapter extends BaseCrossChainAdapter {
 
   public subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
     }
 
-    return this.balanceAdapter.subscribeBalance(token, address);
+    return this.balanceAdapter.subscribeBalance(token, address, tokenId);
   }
 
   public subscribeMaxInput(
