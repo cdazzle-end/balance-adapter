@@ -34,6 +34,8 @@ export abstract class BalanceAdapter {
     
     const tokenConfig = this.tokens[token.toUpperCase()];
 
+    // If token not ibn bridge database, check for asset in our asset registry. if it exists, create a new BasicToken with the appropriate values
+
     if (!tokenConfig) throw new TokenNotFound(token, this.chain);
 
     return tokenConfig as R;
