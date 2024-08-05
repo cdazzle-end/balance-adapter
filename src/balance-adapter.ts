@@ -2,7 +2,7 @@ import { AnyApi } from "@acala-network/sdk-core";
 
 import { Observable } from "@polkadot/types/types";
 
-import { ChainId } from "./configs";
+import { ChainId, chains } from "./configs";
 import { TokenNotFound } from "./errors";
 import { BalanceData, BasicToken, FN } from "./types";
 
@@ -38,6 +38,7 @@ export abstract class BalanceAdapter {
 
     if (!tokenConfig) throw new TokenNotFound(token, this.chain);
     // Get chain number
+    const paraID = chains[this.chain].paraChainId
     
 
     return tokenConfig as R;
