@@ -298,7 +298,8 @@ export abstract class BaseCrossChainAdapter {
 
   public abstract subscribeTokenBalance(
     token: string,
-    address: string
+    address: string,
+    tokenId?: string
   ): Observable<BalanceData>;
 
   public getTokenBalance(token: string, address: string): Promise<BalanceData> {
