@@ -2,12 +2,12 @@ import { PolkadotAdapter, KiltAdapter, PendulumAdapter, NodleAdapter, SubsocialA
 import { BasicToken, ExtendedToken, MyAssetRegistryObject, Relay, TokenData } from './types'
 import fs from 'fs'
 import path from 'path';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 import { ChainId } from './configs';
 import { kusamaChains } from './configs/chains/kusama-chains';
 import { polkadotChains } from './configs/chains/polkadot-chains';
 import { AssetObjectNotFound } from './errors';
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export function getAdapter(relay: Relay, paraId: number){
     if( relay == "kusama"){
@@ -177,11 +177,13 @@ export function getAssetRegistryObject(paraId: number, localId: string, relay: R
     return asset
 }
 
+// TODO Change import structure to be modular and flexible, not just on local machine
 export function getAssetRegistry(relay: Relay){
-    let polkadotAssetsDir = 'C:/Users/dazzl/CodingProjects/substrate/polkadot_assets'
+    // Using absolute path because balance-adapter is imported into arb-executor
+    let polkadotAssetsDir = 'C:/Users/dazzl/CodingProjects/substrate/polkadot_assets/assets/asset_registry'
     // let assetRegistry: MyAssetRegistryObject[] = relay === 'kusama' ? JSON.parse(fs.readFileSync(path.join(__dirname, '../../allAssets.json'), 'utf8')) : JSON.parse(fs.readFileSync(path.join(__dirname, '../../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'), 'utf8'));
-    let assetRegistryPath = relay === 'kusama' ? '../../allAssets.json' : '../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'
-    let assetRegistry: MyAssetRegistryObject[] = JSON.parse(fs.readFileSync(path.join(__dirname, assetRegistryPath), 'utf8'));
+    let assetRegistryPath = relay === 'kusama' ? 'allAssetsKusamaCollected.json' : 'allAssetsPolkadotCollected.json'
+    let assetRegistry: MyAssetRegistryObject[] = JSON.parse(fs.readFileSync(path.join(polkadotAssetsDir, assetRegistryPath), 'utf8'));
     return assetRegistry
 }
 
