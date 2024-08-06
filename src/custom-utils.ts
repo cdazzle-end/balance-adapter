@@ -178,6 +178,7 @@ export function getAssetRegistryObject(paraId: number, localId: string, relay: R
 }
 
 export function getAssetRegistry(relay: Relay){
+    let polkadotAssetsDir = 'C:/Users/dazzl/CodingProjects/substrate/polkadot_assets'
     // let assetRegistry: MyAssetRegistryObject[] = relay === 'kusama' ? JSON.parse(fs.readFileSync(path.join(__dirname, '../../allAssets.json'), 'utf8')) : JSON.parse(fs.readFileSync(path.join(__dirname, '../../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'), 'utf8'));
     let assetRegistryPath = relay === 'kusama' ? '../../allAssets.json' : '../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'
     let assetRegistry: MyAssetRegistryObject[] = JSON.parse(fs.readFileSync(path.join(__dirname, assetRegistryPath), 'utf8'));
