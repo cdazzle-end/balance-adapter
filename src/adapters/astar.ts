@@ -10,7 +10,7 @@ import { BalanceAdapter, BalanceAdapterConfigs } from "../balance-adapter";
 import { BaseCrossChainAdapter } from "../base-chain-adapter";
 import { ChainId, chains } from "../configs";
 import { ApiNotFound, InvalidAddress, TokenNotFound } from "../errors";
-import { BalanceData, ExtendedToken, TokenData, TransferParams } from "../types";
+import { BalanceData, TokenData, TransferParams } from "../types";
 import { validateAddress, createRouteConfigs } from "../utils";
 
 
