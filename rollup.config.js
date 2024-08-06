@@ -25,7 +25,7 @@ function addJsExtension(isMjsOutput) {
 }
 const customAliases = alias({
   entries: [
-    { find: '@acala-network/sdk/wallet', replacement: '@acala-network/sdk/wallet.js' },
+    // { find: '@acala-network/sdk/wallet', replacement: '@acala-network/sdk/wallet.js' },
     { find: '@acala-network/sdk/utils/storage', replacement: '@acala-network/sdk/utils/storage.js' }
   ]
 });
