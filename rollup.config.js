@@ -12,7 +12,12 @@ function addJsExtension(isMjsOutput) {
     name: 'add-js-extension',
     resolveId(source, importer) {
       // Check if the output format is 'es' (for .mjs)
-        if (isMjsOutput && source.startsWith('@acala-network/sdk/')) {
+      if (isMjsOutput && source.startsWith('@acala-network/sdk/wallet')) {
+        return {
+          id: source + '/index.js',
+          external: true
+        };
+      } else if (isMjsOutput && source.startsWith('@acala-network/sdk/')) {
           return {
             id: source + '.js',
             external: true
