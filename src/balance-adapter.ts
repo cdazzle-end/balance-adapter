@@ -3,7 +3,7 @@ import { AnyApi } from "@acala-network/sdk-core";
 import { Observable } from "@polkadot/types/types";
 
 import { ChainId, chains } from "./configs";
-import { TokenNotFound } from "./errors";
+// import { TokenNotFound } from "./errors";
 import { BalanceData, BasicToken, ExtendedToken, FN, Relay, TokenData } from "./types";
 import { createBasicTokenFromAsset, createExtendedTokenFromAsset, createTokenDataFromAsset, getAssetRegistryObject, getRelayForChainId } from "./custom-utils";
 
@@ -40,7 +40,7 @@ export abstract class BalanceAdapter {
     if (!tokenConfig){
       // If asset id not passed in
       // if(!tokenId) throw new TokenNotFound(token, this.chain);
-      if(!tokenId) throw new Error(`Token Config not found for ${token} on ${this.chain}. Token ID was not passed to getToken()`)
+      if(!tokenId) throw new Error(`Token Config not found for ${token} on ${this.chain}. Token ID was not passed to getToken() | ${tokenId}`)
       // Get chain number
       const paraId = chains[this.chain].paraChainId
       let relay: Relay = getRelayForChainId(this.chain)
