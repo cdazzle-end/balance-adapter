@@ -39,8 +39,8 @@ export abstract class BalanceAdapter {
     // If token not in balance adapter database, check for asset in our asset registry. if it exists, create a new BasicToken with the appropriate values
     if (!tokenConfig){
       // If asset id not passed in
-      if(!tokenId) throw new TokenNotFound(token, this.chain);
-
+      // if(!tokenId) throw new TokenNotFound(token, this.chain);
+      if(!tokenId) throw new Error(`Token Config not found for ${token} on ${this.chain}. Token ID was not passed to getToken()`)
       // Get chain number
       const paraId = chains[this.chain].paraChainId
       let relay: Relay = getRelayForChainId(this.chain)
