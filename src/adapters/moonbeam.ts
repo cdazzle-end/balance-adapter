@@ -469,7 +469,7 @@ class MoonbeamBalanceAdapter extends BalanceAdapter {
     const queryData = tokenData.toQuery();
     console.log(`Query Data: ${queryData}`)
 
-    return this.storages.assets(address, tokenData.toQuery()).observable.pipe(
+    return this.storages.assets(tokenData.toQuery(), address).observable.pipe(
       map((balance) => {
         const amount = FN.fromInner(
           balance.unwrapOrDefault()?.balance?.toString() || "0",
