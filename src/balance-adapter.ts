@@ -32,7 +32,7 @@ export abstract class BalanceAdapter {
   }
 
   // Get token by symbol, or by asset id if not found
-  public getToken<R extends BasicToken = BasicToken>(token: string, tokenId?: string): R {
+  public getToken<R extends BasicToken = BasicToken>(token: string, tokenId: string): R {
     
     let tokenConfig = this.tokens[token.toUpperCase()];
 

@@ -69,7 +69,7 @@ class BaseAcalaAdapter extends BaseCrossChainAdapter {
   public subscribeTokenBalance(
     token: string,
     address: string,
-    tokenId?: string
+    tokenId: string
   ): Observable<BalanceData> {
     if (!this.wallet) {
       throw new ApiNotFound(this.chain.id);
@@ -91,6 +91,7 @@ class BaseAcalaAdapter extends BaseCrossChainAdapter {
 
   public subscribeMaxInput(
     token: string,
+    tokenId: string,
     address: string,
     to: ChainId
   ): Observable<FixedPointNumber> {
@@ -108,6 +109,7 @@ class BaseAcalaAdapter extends BaseCrossChainAdapter {
               amount: FixedPointNumber.ZERO,
               to,
               token,
+              tokenId,
               address:
                 to === "moonriver" || to === "moonbeam"
                   ? "0x0000000000000000000000000000000000000000"

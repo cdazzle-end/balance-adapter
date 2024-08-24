@@ -114,6 +114,7 @@ class BaseDarwiniaAdapter extends BaseCrossChainAdapter {
 
   public subscribeMaxInput(
     token: string,
+    tokenId: string,
     address: string,
     to: ChainId
   ): Observable<FN> {
@@ -128,6 +129,7 @@ class BaseDarwiniaAdapter extends BaseCrossChainAdapter {
               amount: FN.ONE,
               to,
               token,
+              tokenId,
               address,
               signer: address,
             })
@@ -137,7 +139,7 @@ class BaseDarwiniaAdapter extends BaseCrossChainAdapter {
         .pipe(map((i) => i.available)),
     }).pipe(
       map(({ balance, txFee }) => {
-        const tokenMeta = this.balanceAdapter?.getToken(token);
+        const tokenMeta = this.balanceAdapter?.getToken(token, tokenId);
         const feeFactor = 1.2;
         const fee = FN.fromInner(txFee, tokenMeta?.decimals).mul(
           new FN(feeFactor)

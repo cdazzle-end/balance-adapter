@@ -92,13 +92,13 @@ export abstract class BaseCrossChainAdapter {
   public subscribeInputConfig(
     params: Omit<TransferParamsWithSigner, "amount">
   ): Observable<InputConfig> {
-    const { signer, to, token } = params;
+    const { signer, to, token, tokenId} = params;
 
     const destFee = this.getCrossChainFee(token, to);
 
     // subscribe destination min receive
     const minInput$ = this.subscribeMinInput(token, to);
-    const maxInput$ = this.subscribeMaxInput(token, signer, to);
+    const maxInput$ = this.subscribeMaxInput(token, tokenId, signer, to);
     const estimateFee$ = this.estimateTxFee({
       ...params,
       amount: new FN("10000000000"),
@@ -308,12 +308,13 @@ export abstract class BaseCrossChainAdapter {
 
   public abstract subscribeMaxInput(
     token: string,
+    tokenId: string,
     address: string,
     to: ChainId
   ): Observable<FN>;
 
-  public getMaxInput(token: string, address: string, to: ChainId): Promise<FN> {
-    return firstValueFrom(this.subscribeMaxInput(token, address, to));
+  public getMaxInput(token: string, tokenId: string, address: string, to: ChainId): Promise<FN> {
+    return firstValueFrom(this.subscribeMaxInput(token, tokenId, address, to));
   }
 
   public abstract createTx(

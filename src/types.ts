@@ -78,6 +78,7 @@ export interface TransferParams {
   amount: FixedPointNumber;
   to: ChainId;
   token: string;
+  tokenId: string
 }
 
 export interface TransferParamsWithSigner extends TransferParams {

@@ -440,7 +440,7 @@ class MoonbeamBalanceAdapter extends BalanceAdapter {
   public subscribeBalance(
     token: string,
     address: string,
-    tokenId?: string
+    tokenId: string
   ): Observable<BalanceData> {
     const storage = this.storages.balances(address);
 
@@ -464,11 +464,16 @@ class MoonbeamBalanceAdapter extends BalanceAdapter {
 
     if (!tokenData) throw new TokenNotFound(token);
 
-    return this.storages.assets(tokenData.toQuery(), address).observable.pipe(
+    console.log(`Getting balance data for: ${token} - ${tokenId}`)
+    console.log(`Asset object: ${JSON.stringify(tokenData, null, 2)}`)
+    const queryData = tokenData.toQuery();
+    console.log(`Query Data: ${queryData}`)
+
+    return this.storages.assets(address, tokenData.toQuery()).observable.pipe(
       map((balance) => {
         const amount = FN.fromInner(
           balance.unwrapOrDefault()?.balance?.toString() || "0",
-          this.getToken(token).decimals
+          this.getToken(token, tokenId).decimals
         );
 
         return {
@@ -503,7 +508,7 @@ class BaseMoonbeamAdapter extends BaseCrossChainAdapter {
   public subscribeTokenBalance(
     token: string,
     address: string,
-    tokenId?: string
+    tokenId: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);

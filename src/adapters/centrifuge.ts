@@ -101,7 +101,7 @@ class CentrifugeBalanceAdapter extends BalanceAdapter {
   public subscribeBalance(
     name: string,
     address: string,
-    tokenId?: string
+    tokenId: string
   ): Observable<BalanceData> {
     if (!validateAddress(address)) throw new InvalidAddress(address);
 
@@ -162,7 +162,7 @@ class BaseCentrifugeAdapter extends BaseCrossChainAdapter {
   public subscribeTokenBalance(
     token: string,
     address: string,
-    tokenId?: string
+    tokenId: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
@@ -173,6 +173,7 @@ class BaseCentrifugeAdapter extends BaseCrossChainAdapter {
 
   public subscribeMaxInput(
     token: string,
+    tokenId: string,
     address: string,
     to: ChainId
   ): Observable<FN> {
@@ -187,16 +188,17 @@ class BaseCentrifugeAdapter extends BaseCrossChainAdapter {
               amount: FN.ZERO,
               to,
               token,
+              tokenId,
               address,
               signer: address,
             })
           : "0",
       balance: this.balanceAdapter
-        .subscribeBalance(token, address)
+        .subscribeBalance(token, address, tokenId)
         .pipe(map((i) => i.available)),
     }).pipe(
       map(({ balance, txFee }) => {
-        const tokenMeta = this.balanceAdapter?.getToken(token);
+        const tokenMeta = this.balanceAdapter?.getToken(token, tokenId);
         const feeFactor = 1.2;
         const fee = FN.fromInner(txFee, tokenMeta?.decimals).mul(
           new FN(feeFactor)

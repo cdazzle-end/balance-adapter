@@ -57,7 +57,7 @@ class TinkernetBalanceAdapter extends BalanceAdapter {
   public subscribeBalance(
     token: string,
     address: string,
-    tokenId?: string
+    tokenId: string
   ): Observable<BalanceData> {
     const storage = this.storages.balances(address);
 
@@ -99,7 +99,7 @@ class TinkernetBaseAdapter extends BaseCrossChainAdapter {
   public subscribeTokenBalance(
     token: string,
     address: string,
-    tokenId?: string
+    tokenId: string
   ): Observable<BalanceData> {
     if (!this.balanceAdapter) {
       throw new ApiNotFound(this.chain.id);
@@ -110,6 +110,7 @@ class TinkernetBaseAdapter extends BaseCrossChainAdapter {
 
   public subscribeMaxInput(
     token: string,
+    tokenId: string,
     address: string,
     to: ChainId
   ): Observable<FN> {
@@ -122,15 +123,16 @@ class TinkernetBaseAdapter extends BaseCrossChainAdapter {
         amount: FN.ZERO,
         to,
         token,
+        tokenId,
         address,
         signer: address,
       }),
       balance: this.balanceAdapter
-        .subscribeBalance(token, address)
+        .subscribeBalance(token, address, tokenId)
         .pipe(map((i) => i.available)),
     }).pipe(
       map(({ balance, txFee }) => {
-        const tokenMeta = this.balanceAdapter?.getToken(token);
+        const tokenMeta = this.balanceAdapter?.getToken(token, tokenId);
         const feeFactor = 1.2;
         const fee = FN.fromInner(txFee, tokenMeta?.decimals).mul(
           new FN(feeFactor)
