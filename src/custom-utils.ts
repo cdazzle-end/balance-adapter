@@ -167,7 +167,6 @@ export function getAssetRegistryObject(paraId: number, localId: string, relay: R
         if(paraId == 0 && assetRegistryObject.tokenData.chain == 0){
             return true
         }
-        // console.log(JSON.stringify(assetRegistryObject.tokenData.localId).replace(/\\|"/g, ""))
         return assetRegistryObject.tokenData.chain == paraId && JSON.stringify(assetRegistryObject.tokenData.localId).replace(/\\|"/g, "") == localId
     })
     if(asset == undefined){
