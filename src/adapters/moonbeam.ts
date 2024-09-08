@@ -464,10 +464,10 @@ class MoonbeamBalanceAdapter extends BalanceAdapter {
 
     if (!tokenData) throw new TokenNotFound(token);
 
-    console.log(`Getting balance data for: ${token} - ${tokenId}`)
-    console.log(`Asset object: ${JSON.stringify(tokenData, null, 2)}`)
+    // console.log(`Getting balance data for: ${token} - ${tokenId}`)
+    // console.log(`Asset object: ${JSON.stringify(tokenData, null, 2)}`)
     const queryData = tokenData.toQuery();
-    console.log(`Query Data: ${queryData}`)
+    // console.log(`Query Data: ${queryData}`)
 
     return this.storages.assets(tokenData.toQuery(), address).observable.pipe(
       map((balance) => {
