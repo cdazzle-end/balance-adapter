@@ -530,9 +530,11 @@ class HydradxBalanceAdapter extends BalanceAdapter {
         }))
       );
     }
-
+    
+    console.log(`get hydra token`)
     const token = this.getToken<ExtendedToken>(tokenName, tokenId);
 
+    
     return this.storages.assets(token.toRaw(), address).observable.pipe(
       map((balance) => {
         const amount = FN.fromInner(
