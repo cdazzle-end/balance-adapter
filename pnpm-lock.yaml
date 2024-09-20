@@ -45,6 +45,9 @@ importers:
       '@polkadot/api-base':
         specifier: ^12.1.1
         version: 12.4.2
+      '@polkadot/api-derive':
+        specifier: ^12.1.1
+        version: 12.1.1
       '@polkadot/apps-config':
         specifier: ^0.133.1
         version: 0.133.1(@polkadot/keyring@12.6.2)(@polkadot/util-crypto@12.6.2)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)
