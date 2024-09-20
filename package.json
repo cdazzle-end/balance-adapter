@@ -50,7 +50,6 @@
     "@polkadot/types": "^10.9.1"
   },
   "dependencies": {
-
     "@acala-network/api": "^5",
     "@acala-network/sdk": "^4.1.9-7",
     "@acala-network/sdk-core": "^4.1.9-7",
@@ -59,7 +58,8 @@
     "@polkadot/types": "^10.9.1",
     "axios": "^0.27.2",
     "ethers": "^5",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "@polkadot-assets/updater": "file:../polkadot_assets"
   },
   "devDependencies": {
     "@acala-network/eth-providers": "^2.7.1",
