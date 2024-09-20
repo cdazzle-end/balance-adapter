@@ -1,4 +1,4 @@
-import { Wallet } from "@acala-network/sdk/wallet/wallet";
+import { Wallet } from "@acala-network/sdk/wallet/wallet.js";
 import { AnyApi, FixedPointNumber } from "@acala-network/sdk-core";
 import {
   catchError,
