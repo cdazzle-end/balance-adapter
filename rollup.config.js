@@ -38,6 +38,7 @@ export default [
       file: './dist/index.cjs',
       format: 'cjs',
     },
+    external: ['@polkadot-assets/updater'],
     plugins: [
       json(),
       typescript(),
