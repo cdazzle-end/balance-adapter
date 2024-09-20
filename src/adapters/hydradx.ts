@@ -511,6 +511,7 @@ class HydradxBalanceAdapter extends BalanceAdapter {
     address: string,
     tokenId: string
   ): Observable<BalanceData> {
+    console.log(`subscribe hydra balance`)
     const storage = this.storages.balances(address);
 
     if (tokenName === this.nativeToken) {
