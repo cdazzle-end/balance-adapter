@@ -36,16 +36,25 @@
     "build:release": "polkadot-ci-ghact-build"
   },
   "peerDependencies": {
-    "@acala-network/api": "^5",
+    "@acala-network/api": "^6.1.0",
+    "@acala-network/chopsticks": "^0.12.1",
+    "@acala-network/eth-providers": "^2.7.20",
+    "@acala-network/sdk": "^4.1.9-7",
+    "@acala-network/sdk-core": "^4.1.9-7",
+    "@acala-network/sdk-swap": "^4.1.9-13",
+    "@acala-network/sdk-wallet": "^4.1.5",
     "@polkadot/api": "^10",
     "ethers": "^5"
   },
   "resolutions": {
-    "@acala-network/api": "^5.1.1",
+    "@acala-network/api": "^6.1.0",
+    "@acala-network/eth-providers": "^2.7.20",
     "@acala-network/sdk": "^4.1.9-7",
     "@acala-network/sdk-core": "^4.1.9-7",
-    "@polkadot/api": "^10.9.1",
-    "@polkadot/types": "^10.9.1"
+    "@acala-network/sdk-swap": "^4.1.9-13",
+    "@acala-network/sdk-wallet": "^4.1.5",
+    "@polkadot/api": "12.1.1",
+    "@polkadot/types": "12.1.1"
   },
   "dependencies": {
     "@acala-network/sdk-wallet": "^4.1.5",
