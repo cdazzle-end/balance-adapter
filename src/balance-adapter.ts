@@ -45,6 +45,7 @@ export abstract class BalanceAdapter {
       const paraId = chains[this.chain].paraChainId
       let relay: Relay = getRelayForChainId(this.chain)
 
+      console.log(`balance adapter: Get asset object`)
       // get asset registry object by chain and id
       let assetRegistryObject = getAssetRegistryObject(paraId, tokenId, relay)
       
