@@ -16,3 +16,10 @@ yarnPath: .yarn/releases/yarn-3.2.1.cjs
 
 
 yarn-path ".yarn/releases/yarn-1.22.19.cjs"
+
+
+package.json
+
+  "engines": {
+    "yarn": "^1.10.1"
+  },

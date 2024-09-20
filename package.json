@@ -19,9 +19,7 @@
   "files": [
     "dist"
   ],
-  "engines": {
-    "yarn": "^1.10.1"
-  },
+
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
