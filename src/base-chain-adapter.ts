@@ -41,7 +41,7 @@ import {
 } from "./types";
 import {
   createXTokensDestParam,
-  createXTokensWeight,
+  // createXTokensWeight,
   isChainEqual,
   validateAddress,
 } from "./utils";
@@ -351,7 +351,7 @@ export abstract class BaseCrossChainAdapter {
           isToRelayChain,
         }),
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        createXTokensWeight(this.api, this.getDestWeight(token, to)!)
+        // createXTokensWeight(this.api, this.getDestWeight(token, to)!)
       );
     }
 
@@ -363,7 +363,7 @@ export abstract class BaseCrossChainAdapter {
           isToRelayChain,
         }) as any,
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        createXTokensWeight(this.api, this.getDestWeight(token, to)!)
+        // createXTokensWeight(this.api, this.getDestWeight(token, to)!)
       );
     }
 

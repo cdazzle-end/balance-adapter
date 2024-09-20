@@ -29,6 +29,17 @@ const customAliases = alias({
     { find: '@acala-network/sdk/utils/storage', replacement: '@acala-network/sdk/utils/storage.js' }
   ]
 });
+
+const external = [
+  "@acala-network/api",
+  "@acala-network/chopsticks",
+  "@acala-network/eth-providers",
+  "@acala-network/sdk",
+  "@acala-network/sdk-core",
+  "@acala-network/sdk-swap",
+  "@acala-network/sdk-wallet",
+  '@polkadot-assets/updater'
+]
 // Handle mjs and cjs differently so we can add the proper file extensiosn to the mjs imports
 export default [
   // cjs
@@ -38,7 +49,7 @@ export default [
       file: './dist/index.cjs',
       format: 'cjs',
     },
-    external: ['@polkadot-assets/updater'],
+    external: external,
     plugins: [
       json(),
       typescript(),
@@ -56,6 +67,7 @@ export default [
     output: [
         { file: './dist/index.mjs', format: 'es' }
       ],
+    external: external,
     plugins: [
       // customAliases,
       json(),

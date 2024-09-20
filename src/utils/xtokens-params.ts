@@ -127,14 +127,14 @@ export function createXTokensAssetsParam(
   };
 }
 
-export function createXTokensWeight(api: AnyApi, weight: string) {
-  const tx = api.tx.xTokens?.transfer || api.tx.ormlXTokens?.transfer;
+// export function createXTokensWeight(api: AnyApi, weight: string) {
+//   const tx = api.tx.xTokens?.transfer || api.tx.ormlXTokens?.transfer;
 
-  if (!tx) throw new Error("xTokens.transfer tx is not found");
+//   if (!tx) throw new Error("xTokens.transfer tx is not found");
 
-  const weightType = tx.meta.args[3].type.toString();
-  const isUnlimited =
-    weightType === "XcmV3WeightLimit" || weightType === "XcmV2WeightLimit";
+//   const weightType = tx.meta.args[3].type.toString();
+//   const isUnlimited =
+//     weightType === "XcmV3WeightLimit" || weightType === "XcmV2WeightLimit";
 
-  return isUnlimited ? "Unlimited" : weight;
-}
+//   return isUnlimited ? "Unlimited" : weight;
+// }

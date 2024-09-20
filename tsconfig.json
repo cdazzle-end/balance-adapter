@@ -1,7 +1,7 @@
 {
   "exclude": ["build/**/*", "**/build/**/*", "scripts/**/*", "docs/**/*", "**/*.spec.ts"],
   "compilerOptions": {
-    "target": "es2015",
+    "target": "ESNext",
     "module": "esnext",
     "baseUrl": ".",
     "resolveJsonModule": true,
@@ -17,6 +17,7 @@
     "noImplicitAny": false,
     "noUnusedLocals": true,
     "strict": true,
+    
   },
   "include": ["src"]
 }

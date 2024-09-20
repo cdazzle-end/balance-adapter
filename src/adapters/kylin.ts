@@ -1,4 +1,4 @@
-import { Storage } from "@acala-network/sdk/utils/storage";
+import { Storage } from "@acala-network/sdk/dist/esm/utils/storage";
 import { AnyApi, FixedPointNumber as FN } from "@acala-network/sdk-core";
 import { combineLatest, map, Observable } from "rxjs";
 
@@ -14,7 +14,7 @@ import { BalanceData, ExtendedToken, TransferParams } from "../types";
 import {
   createRouteConfigs,
   createXTokensDestParam,
-  createXTokensWeight,
+  // createXTokensWeight,
   isChainEqual,
   validateAddress,
 } from "../utils";
@@ -262,7 +262,7 @@ class BaseKylinAdapter extends BaseCrossChainAdapter {
         isToRelayChain,
       }),
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      createXTokensWeight(this.api, this.getDestWeight(token, to)!)
+      // createXTokensWeight(this.api, this.getDestWeight(token, to)!)
     );
   }
 }

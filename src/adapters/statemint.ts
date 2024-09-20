@@ -1,4 +1,4 @@
-// import { Storage } from "@acala-network/sdk/utils/storage";
+// import { Storage } from "@acala-network/sdk/dist/esm/utils/storage";
 import { Storage } from "@acala-network/sdk/dist/esm/utils/storage";
 import { AnyApi, FixedPointNumber as FN } from "@acala-network/sdk-core";
 import { combineLatest, map, Observable } from "rxjs";
