@@ -10,7 +10,7 @@
     "typeRoots": ["./node_modules/@polkadot/ts", "./node_modules/@types"],
     "jsx": "preserve",
     "noImplicitReturns": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,

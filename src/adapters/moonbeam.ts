@@ -1,5 +1,5 @@
 import { AnyApi, FixedPointNumber as FN } from "@acala-network/sdk-core";
-import { Storage } from "@acala-network/sdk/dist/esm/utils/storage";
+import { Storage } from "@acala-network/sdk/utils/storage";
 import { SubmittableExtrinsic } from "@polkadot/api/types";
 import { ISubmittableResult } from "@polkadot/types/types";
 

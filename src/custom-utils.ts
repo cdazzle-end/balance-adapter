@@ -236,3 +236,5 @@ export function createTokenDataFromAsset(asset: MyAssetRegistryObject): TokenDat
     }
     return tokenData
 }
+
+

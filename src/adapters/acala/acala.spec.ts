@@ -1,15 +1,15 @@
 import { FixedPointNumber } from "@acala-network/sdk-core";
-import { Bridge } from "../../bridge";
-import { KaruraAdapter } from "./acala";
-import { KusamaAdapter } from "../polkadot";
-import { MoonriverAdapter } from "../moonbeam";
-import { StatemineAdapter } from "../statemint";
+import { Bridge } from "../../bridge.js";
+import { KaruraAdapter } from "./acala.js";
+import { KusamaAdapter } from "../polkadot.js";
+import { MoonriverAdapter } from "../moonbeam.js";
+import { StatemineAdapter } from "../statemint.js";
 import { SubmittableExtrinsic } from "@polkadot/api/types";
 import { ISubmittableResult } from "@polkadot/types/types";
 import { ApiPromise, WsProvider } from "@polkadot/api";
-import { ApiProvider } from "../../api-provider";
+import { ApiProvider } from "../../api-provider.js";
 import { firstValueFrom, from } from "rxjs";
-import { ChainId } from "../../configs";
+import { ChainId } from "../../configs/index.js";
 import { u32 } from '@polkadot/types';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 

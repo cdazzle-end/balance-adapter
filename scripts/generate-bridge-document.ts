@@ -1,5 +1,5 @@
 import path from 'path';
-import { traverseDir } from './traverse-dir';
+import { traverseDir } from './traverse-dir.js.js.js';
 import { flatten } from 'lodash';
 import { writeFileSync, rmSync } from 'fs';
 
@@ -97,3 +97,5 @@ function main () {
 }
 
 main();
+
+

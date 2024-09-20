@@ -36,20 +36,14 @@
     "build:release": "polkadot-ci-ghact-build"
   },
   "peerDependencies": {
-    "@acala-network/api": "^6.1.0",
-    "@acala-network/chopsticks": "^0.12.1",
-    "@acala-network/eth-providers": "^2.7.20",
-    "@acala-network/sdk": "^4.1.9-7",
-    "@acala-network/sdk-core": "^4.1.9-7",
-    "@acala-network/sdk-swap": "^4.1.9-13",
-    "@acala-network/sdk-wallet": "^4.1.5",
+
     "@polkadot/api": "^10",
     "ethers": "^5"
   },
   "resolutions": {
     "@acala-network/api": "^6.1.0",
     "@acala-network/eth-providers": "^2.7.20",
-    "@acala-network/sdk": "^4.1.9-7",
+    "@acala-network/sdk": "4.1.9-13",
     "@acala-network/sdk-core": "^4.1.9-7",
     "@acala-network/sdk-swap": "^4.1.9-13",
     "@acala-network/sdk-wallet": "^4.1.5",
@@ -97,7 +91,7 @@
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
 
-    "typescript": "^4.7.4"
+    "typescript": "^5.0.0"
   },
   "stableVersion": "0.1.5-19"
 }

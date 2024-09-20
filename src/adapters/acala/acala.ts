@@ -1,4 +1,4 @@
-import { Wallet } from "@acala-network/sdk/dist/esm/wallet";
+import { Wallet } from "@acala-network/sdk/wallet/wallet";
 import { AnyApi, FixedPointNumber } from "@acala-network/sdk-core";
 import {
   catchError,

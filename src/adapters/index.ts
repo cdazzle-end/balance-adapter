@@ -1,4 +1,4 @@
-export * from "./acala";
+export * from "./acala/index.js";
 export * from "./astar";
 export * from "./bifrost";
 export * from "./darwinia";
