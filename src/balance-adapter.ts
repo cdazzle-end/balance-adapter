@@ -40,12 +40,10 @@ export abstract class BalanceAdapter {
     if (!tokenConfig){
       // If asset id not passed in
       // if(!tokenId) throw new TokenNotFound(token, this.chain);
-      if(!tokenId) throw new Error(`Token Config not found for ${token} on ${this.chain}. Token ID was not passed to getToken() | ${tokenId}`)
       // Get chain number
       const paraId = chains[this.chain].paraChainId
       let relay: Relay = getRelayForChainId(this.chain)
 
-      console.log(`balance adapter: Get asset object`)
       // get asset registry object by chain and id
       let assetRegistryObject = getAssetRegistryObject(paraId, tokenId, relay)
       

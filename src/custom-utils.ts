@@ -165,7 +165,6 @@ export function getAdapter(relay: Relay, paraId: number){
 }
 
 export function getAssetRegistryObject(paraId: number, localId: string, relay: Relay): MyAssetRegistryObject{
-    console.log(`Getting asset registry object for paraId: ${paraId}, localId: ${localId}, relay: ${relay}`)
     let assetRegistry = getAssetRegistry(relay)
     const formattedLocalId = JSON.stringify(localId).replace(/\\|"/g, "")
     let asset = assetRegistry.find((assetRegistryObject: MyAssetRegistryObject) => {
@@ -178,7 +177,6 @@ export function getAssetRegistryObject(paraId: number, localId: string, relay: R
         // throw new Error(`Balance Adapter: Asset not found in registry: chainId: ${paraId}, localId: ${localId} | localId stringify: ${JSON.stringify(localId)}`)
         throw new AssetObjectNotFound(localId, paraId)
     }
-    console.log(`Asset: ${asset.tokenData.name} found in registry`)
     return asset
 }
 

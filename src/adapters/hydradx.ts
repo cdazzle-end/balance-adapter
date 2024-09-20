@@ -511,7 +511,7 @@ class HydradxBalanceAdapter extends BalanceAdapter {
     address: string,
     tokenId: string
   ): Observable<BalanceData> {
-    console.log(`subscribe hydra balance`)
+    
     const storage = this.storages.balances(address);
 
     if (tokenName === this.nativeToken) {
@@ -531,10 +531,8 @@ class HydradxBalanceAdapter extends BalanceAdapter {
       );
     }
     
-    console.log(`get hydra token`)
     const token = this.getToken<ExtendedToken>(tokenName, tokenId);
 
-    console.log(`hydra token: ${JSON.stringify(token)}`)
     return this.storages.assets(token.toRaw(), address).observable.pipe(
       map((balance) => {
         const amount = FN.fromInner(
