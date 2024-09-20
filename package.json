@@ -63,6 +63,7 @@
     "@acala-network/sdk-core": "^4.1.9-7",
     "@polkadot/api": "12.1.1",
     "@polkadot/api-base": "^12.1.1",
+    "@polkadot/api-derive": "^12.1.1",
     "@polkadot/apps-config": "^0.133.1",
     "@polkadot/keyring": "^12.6.2",
     "@polkadot/types": "^12.1.1",

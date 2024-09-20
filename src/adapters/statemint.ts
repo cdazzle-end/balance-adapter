@@ -1,9 +1,10 @@
-import { Storage } from "@acala-network/sdk/utils/storage";
+// import { Storage } from "@acala-network/sdk/utils/storage";
+import { Storage } from "@acala-network/sdk/dist/esm/utils/storage";
 import { AnyApi, FixedPointNumber as FN } from "@acala-network/sdk-core";
 import { combineLatest, map, Observable } from "rxjs";
 
 import { SubmittableExtrinsic } from "@polkadot/api/types";
-import { DeriveBalancesAll } from "@polkadot/api-derive/balances/types";
+import { DeriveBalancesAll } from "@polkadot/api-derive/types";
 import { ISubmittableResult } from "@polkadot/types/types";
 import { BN } from "@polkadot/util";
 
