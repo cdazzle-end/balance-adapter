@@ -1,13 +1,16 @@
 import { PolkadotAdapter, KiltAdapter, PendulumAdapter, NodleAdapter, SubsocialAdapter, BifrostPolkadotAdapter, ListenAdapter, KicoAdapter, KaruraAdapter, ShidenAdapter, BifrostAdapter, AltairAdapter, ShadowAdapter, CrabAdapter, BasiliskAdapter, IntegriteeAdapter, KintsugiAdapter, PichiuAdapter, MangataAdapter, CalamariAdapter, MoonriverAdapter, TuringAdapter, HeikoAdapter, KhalaAdapter, KusamaAdapter, RobonomicsAdapter, StatemineAdapter, TinkernetAdapter, QuartzAdapter, StatemintAdapter, AcalaAdapter, HydraDxAdapter, InterlayAdapter, MoonbeamAdapter, ParallelAdapter, UniqueAdapter, CentrifugeAdapter, AstarAdapter, PhalaAdapter, CrustAdapter, MantaAdapter, DarwiniaAdapter, OakAdapter, InvarchAdapter, ZeitgeistAdapter} from './adapters/index'
 import { BasicToken, ExtendedToken, MyAssetRegistryObject, Relay, TokenData } from './types'
-import fs from 'fs'
-import path from 'path';
+// import fs from 'fs'
+// import path from 'path';
 // import { fileURLToPath } from 'url';
+import { getAssetRegistry } from '@polkadot-assets/updater'
 import { ChainId } from './configs';
 import { kusamaChains } from './configs/chains/kusama-chains';
 import { polkadotChains } from './configs/chains/polkadot-chains';
 import { AssetObjectNotFound } from './errors';
 // const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export { getAssetRegistry }
 
 export function getAdapter(relay: Relay, paraId: number){
     if( relay == "kusama"){
@@ -178,14 +181,14 @@ export function getAssetRegistryObject(paraId: number, localId: string, relay: R
 }
 
 // TODO Change import structure to be modular and flexible, not just on local machine
-export function getAssetRegistry(relay: Relay){
-    // Using absolute path because balance-adapter is imported into arb-executor
-    let polkadotAssetsDir = 'C:/Users/dazzl/CodingProjects/substrate/polkadot_assets/assets/asset_registry'
-    // let assetRegistry: MyAssetRegistryObject[] = relay === 'kusama' ? JSON.parse(fs.readFileSync(path.join(__dirname, '../../allAssets.json'), 'utf8')) : JSON.parse(fs.readFileSync(path.join(__dirname, '../../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'), 'utf8'));
-    let assetRegistryPath = relay === 'kusama' ? 'allAssetsKusamaCollected.json' : 'allAssetsPolkadotCollected.json'
-    let assetRegistry: MyAssetRegistryObject[] = JSON.parse(fs.readFileSync(path.join(polkadotAssetsDir, assetRegistryPath), 'utf8'));
-    return assetRegistry
-}
+// export function getAssetRegistry(relay: Relay){
+//     // Using absolute path because balance-adapter is imported into arb-executor
+//     let polkadotAssetsDir = 'C:/Users/dazzl/CodingProjects/substrate/polkadot_assets/assets/asset_registry'
+//     // let assetRegistry: MyAssetRegistryObject[] = relay === 'kusama' ? JSON.parse(fs.readFileSync(path.join(__dirname, '../../allAssets.json'), 'utf8')) : JSON.parse(fs.readFileSync(path.join(__dirname, '../../../polkadot_assets/assets/asset_registry/allAssetsPolkadotCollected.json'), 'utf8'));
+//     let assetRegistryPath = relay === 'kusama' ? 'allAssetsKusamaCollected.json' : 'allAssetsPolkadotCollected.json'
+//     let assetRegistry: MyAssetRegistryObject[] = JSON.parse(fs.readFileSync(path.join(polkadotAssetsDir, assetRegistryPath), 'utf8'));
+//     return assetRegistry
+// }
 
 export function getRelayForChainId(chainId: ChainId): Relay{
     // Ensure chainId is of the correct type
